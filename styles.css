@@ -236,10 +236,11 @@ code, pre {
   display: block;
 }
 .logo-text {
-  font-family: 'Syncopate', sans-serif;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  font-size: 1rem;
+  font-family: 'Smooch Sans', sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  font-size: 1.6rem;
+  text-transform: uppercase;
 }
 .nav-links {
   display: flex;
@@ -1006,11 +1007,12 @@ code, pre {
   gap: 8px;
 }
 .brand-name {
-  font-family: 'Syncopate', sans-serif;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  font-size: 1.1rem;
+  font-family: 'Smooch Sans', sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  font-size: 1.7rem;
   color: var(--text-primary);
+  text-transform: uppercase;
 }
 .brand-desc {
   font-size: 0.8rem;
