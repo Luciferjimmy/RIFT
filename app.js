@@ -246,6 +246,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const nameValue = footerNameInput ? footerNameInput.value.trim() : '';
     const emailValue = footerEmailInput.value.trim();
 
+    if (!nameValue) {
+      showFeedback(footerFeedback, 'Name is required.', 'error');
+      return;
+    }
     if (!emailValue) {
       showFeedback(footerFeedback, 'Email address is required.', 'error');
       return;

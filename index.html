@@ -26,6 +26,13 @@
 </head>
 <body>
 
+  <!-- Background Ovals/Orbits for rich dynamic backdrop -->
+  <div class="bg-orbits-container" aria-hidden="true">
+    <div class="bg-orbit bg-orbit-1"></div>
+    <div class="bg-orbit bg-orbit-2"></div>
+    <div class="bg-orbit bg-orbit-3"></div>
+  </div>
+
   <!-- Custom Cursor Followers (Super clean B&W style) -->
   <div id="cursor-follower" class="cursor-follower"></div>
   <div id="cursor-follower-glow" class="cursor-follower-glow"></div>
@@ -522,7 +529,11 @@ Launching eldenring.exe... [RUNNING]</code></pre>
             <p class="waitlist-subtitle">Early access opens in batches. Drop your email and we'll reach out when your slot is ready.</p>
             
             <form class="waitlist-form" id="footer-signup-form" novalidate>
-              <div class="form-row single-input">
+              <div class="form-row">
+                <div class="input-wrapper">
+                  <input type="text" placeholder="Your Name" class="form-input" id="waitlist-name" required autocomplete="name">
+                  <div class="input-glow"></div>
+                </div>
                 <div class="input-wrapper">
                   <input type="email" placeholder="your@email.com" class="form-input" id="waitlist-email" required autocomplete="email">
                   <div class="input-glow"></div>

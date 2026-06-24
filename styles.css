@@ -51,6 +51,7 @@ html {
 }
 
 body {
+  position: relative;
   overflow-x: hidden;
   background-color: var(--bg-obsidian);
   min-height: 100vh;
@@ -1238,6 +1239,91 @@ code, pre {
   margin-top: 8px;
   font-weight: 500;
   text-align: center;
+}
+
+/* Premium Form Inputs styling */
+.input-wrapper {
+  position: relative;
+  width: 100%;
+}
+.form-input {
+  width: 100%;
+  padding: 16px 24px;
+  font-size: 0.95rem;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  color: #000000;
+  background-color: #FAFBFB;
+  border: 1px solid var(--border-subtle);
+  border-radius: 30px;
+  outline: none;
+  transition: var(--transition-smooth);
+}
+.form-input::placeholder {
+  color: var(--text-muted);
+}
+.form-input:focus {
+  border-color: #000000;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.02);
+}
+
+/* Subtle glow under inputs */
+.input-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 30px;
+  pointer-events: none;
+  z-index: -1;
+  transition: var(--transition-smooth);
+}
+.form-input:focus ~ .input-glow {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.04);
+}
+
+/* Background Orbits / Ovals styling */
+.bg-orbits-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.bg-orbit {
+  position: absolute;
+  border: 1px solid rgba(0, 0, 0, 0.035);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.bg-orbit-1 {
+  width: 900px;
+  height: 600px;
+  border-radius: 50% / 40%;
+  top: -100px;
+  left: -200px;
+  transform: rotate(-25deg);
+}
+.bg-orbit-2 {
+  width: 1200px;
+  height: 800px;
+  border-radius: 40% / 50%;
+  top: 25%;
+  right: -300px;
+  transform: rotate(15deg);
+}
+.bg-orbit-3 {
+  width: 950px;
+  height: 550px;
+  border-radius: 50% / 45%;
+  bottom: 10%;
+  left: -150px;
+  transform: rotate(-10deg);
 }
 
 /* 16. Responsiveness Constraints (RWD) */
