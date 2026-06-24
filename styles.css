@@ -456,7 +456,7 @@ code, pre {
 }
 .mockup-hero {
   height: 160px;
-  background-image: linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0.9)), url('https://cdn.akamai.steamstatic.com/steam/apps/1817130/library_hero.jpg');
+  background-image: linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0.9)), url('https://cdn.akamai.steamstatic.com/steam/apps/1721470/library_hero.jpg');
   background-size: cover;
   background-position: center;
   border-radius: 8px;
