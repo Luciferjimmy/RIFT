@@ -229,9 +229,11 @@ code, pre {
   text-decoration: none;
   color: var(--text-primary);
 }
-.logo-icon {
-  font-size: 1.25rem;
-  color: var(--color-primary);
+.logo-image {
+  height: 22px;
+  width: auto;
+  object-fit: contain;
+  display: block;
 }
 .logo-text {
   font-weight: 800;
@@ -997,11 +999,15 @@ code, pre {
   max-width: 280px;
   text-align: left;
 }
+.footer-logo-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 .brand-name {
   font-weight: 800;
   font-size: 1.3rem;
   color: var(--text-primary);
-  margin-left: 6px;
 }
 .brand-desc {
   font-size: 0.8rem;
