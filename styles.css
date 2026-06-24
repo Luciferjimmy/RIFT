@@ -56,6 +56,13 @@ body {
   min-height: 100vh;
 }
 
+/* Hide default system OS cursor on desktops where custom cursor is active */
+@media (pointer: fine) {
+  *, *::before, *::after {
+    cursor: none !important;
+  }
+}
+
 /* Standard Scrollbar styling */
 ::-webkit-scrollbar {
   width: 6px;
