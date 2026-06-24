@@ -9,8 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Supabase Configuration: Connects waitlist directly to database table
   const SUPABASE_CONFIG = {
-    url: "",       // Paste your Supabase Project URL here
-    anonKey: ""    // Paste your Supabase Public Anon API Key here
+    url: "https://kkucgbskyyynyoryymcw.supabase.co",
+    anonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtrdWNnYnNreXl5bnlvcnl5bWN3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIxMzcyNDgsImV4cCI6MjA5NzcxMzI0OH0.BkW9-GbDpOi4GhVy74wyu8huWdnuN7WazHMKV60-bzI"
   };
 
   /* ------------------------------------------------------------------------
