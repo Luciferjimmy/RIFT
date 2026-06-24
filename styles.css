@@ -775,7 +775,7 @@ code, pre {
   position: relative;
   z-index: 2;
   border-top: 1px solid var(--border-subtle);
-  background-color: var(--bg-section);
+  background-color: transparent;
 }
 .games-section .section-title {
   font-family: var(--font-serif);
@@ -1127,7 +1127,7 @@ code, pre {
 .comparison-section {
   padding: 100px 0;
   border-top: 1px solid var(--border-subtle);
-  background-color: var(--bg-section);
+  background-color: transparent;
   position: relative;
   z-index: 2;
 }
@@ -1300,92 +1300,85 @@ code, pre {
   border: 1px solid rgba(0, 0, 0, 0.05); /* Technical contour lines */
   border-radius: 50%;
   pointer-events: none;
+  transform-origin: center;
 }
 
 /* Group 1: Top-Right Concentric Orbits */
 .bg-orbit-tr-1 {
   width: 300px;
-  height: 200px;
-  border-radius: 50% / 40%;
-  top: 5%;
+  height: 300px;
+  top: 2%;
   right: -50px;
-  transform: rotate(-20deg);
+  transform: scaleY(0.65) rotate(-20deg);
 }
 .bg-orbit-tr-2 {
   width: 550px;
-  height: 380px;
-  border-radius: 50% / 40%;
-  top: 0%;
-  right: -120px;
-  transform: rotate(-20deg);
+  height: 550px;
+  top: -2%;
+  right: -100px;
+  transform: scaleY(0.65) rotate(-20deg);
+  border-color: rgba(13, 148, 136, 0.15); /* Soft Teal Accent! */
 }
 .bg-orbit-tr-3 {
   width: 800px;
-  height: 550px;
-  border-radius: 50% / 40%;
+  height: 800px;
   top: -5%;
-  right: -200px;
-  transform: rotate(-20deg);
+  right: -150px;
+  transform: scaleY(0.65) rotate(-20deg);
 }
 .bg-orbit-tr-4 {
   width: 1050px;
-  height: 720px;
-  border-radius: 50% / 40%;
-  top: -10%;
-  right: -280px;
-  transform: rotate(-20deg);
+  height: 1050px;
+  top: -8%;
+  right: -200px;
+  transform: scaleY(0.65) rotate(-20deg);
 }
 .bg-orbit-tr-5 {
   width: 1300px;
-  height: 900px;
-  border-radius: 50% / 40%;
-  top: -15%;
-  right: -360px;
-  transform: rotate(-20deg);
+  height: 1300px;
+  top: -12%;
+  right: -250px;
+  transform: scaleY(0.65) rotate(-20deg);
 }
 
 /* Group 2: Bottom-Left Concentric Orbits */
 .bg-orbit-bl-1 {
   width: 400px;
-  height: 280px;
-  border-radius: 40% / 50%;
-  bottom: 15%;
-  left: -100px;
-  transform: rotate(15deg);
+  height: 400px;
+  bottom: 12%;
+  left: -80px;
+  transform: scaleX(0.7) rotate(15deg);
 }
 .bg-orbit-bl-2 {
   width: 700px;
-  height: 480px;
-  border-radius: 40% / 50%;
-  bottom: 10%;
-  left: -200px;
-  transform: rotate(15deg);
+  height: 700px;
+  bottom: 8%;
+  left: -150px;
+  transform: scaleX(0.7) rotate(15deg);
+  border-color: rgba(244, 63, 94, 0.15); /* Soft Coral Accent! */
 }
 .bg-orbit-bl-3 {
   width: 1000px;
-  height: 680px;
-  border-radius: 40% / 50%;
-  bottom: 5%;
-  left: -300px;
-  transform: rotate(15deg);
+  height: 1000px;
+  bottom: 4%;
+  left: -200px;
+  transform: scaleX(0.7) rotate(15deg);
 }
 .bg-orbit-bl-4 {
   width: 1300px;
-  height: 880px;
-  border-radius: 40% / 50%;
+  height: 1300px;
   bottom: 0%;
-  left: -400px;
-  transform: rotate(15deg);
+  left: -250px;
+  transform: scaleX(0.7) rotate(15deg);
 }
 
 /* Hero Center Technical Orbit */
 .bg-orbit-center {
   width: 1600px;
-  height: 1100px;
-  border-radius: 50% / 42%;
+  height: 1600px;
   top: 15%;
   left: 50%;
-  transform: translate(-50%, -50%) rotate(-35deg);
+  transform: translate(-50%, -50%) scaleY(0.68) rotate(-35deg);
   border: 1.5px dashed rgba(0, 0, 0, 0.05); /* dashed line for technical contrast */
 }
 
