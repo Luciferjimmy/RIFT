@@ -414,6 +414,268 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  /* ==========================================================================
+     18. Physics Playground (Antigravity Mode)
+     ========================================================================== */
+  const toggleBtn = document.getElementById('physics-toggle');
+  let physicsActive = false;
+  let engine, runner, mouseConstraint;
+  let boundaryBodies = [];
+  let elementBodies = [];
+  let spawnedSpheres = [];
+  let originalScrollY = 0;
+
+  // Targets: headings, bento cards, buttons, mockups, descriptions, stickies
+  const targetSelectors = [
+    '.hero-intro-text',
+    '.hero-cta-wrapper',
+    '#hero-mockup',
+    '.pipeline-title-wrapper',
+    '.scrolly-visual-sticky',
+    '.scrolly-desc-block',
+    '.games-section .section-container',
+    '.bento-card',
+    '.comparison-table-wrapper',
+    '.faq-card',
+    '.waitlist-card'
+  ].join(', ');
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      if (!physicsActive) {
+        startPhysicsPlayground();
+      } else {
+        stopPhysicsPlayground();
+      }
+    });
+  }
+
+  function startPhysicsPlayground() {
+    if (typeof Matter === 'undefined') {
+      console.error('Matter.js not loaded yet');
+      return;
+    }
+    physicsActive = true;
+    toggleBtn.classList.add('active');
+    toggleBtn.innerText = '💥 Restore Layout';
+
+    // 1. Save scroll position and scroll to top instantly to align coordinates
+    originalScrollY = window.scrollY;
+    window.scrollTo({ top: 0, behavior: 'instant' });
+
+    // 2. Lock screen scroll
+    document.body.style.overflow = 'hidden';
+    if (window.lenis) {
+      window.lenis.stop();
+    }
+
+    // 3. Select target elements
+    const elements = document.querySelectorAll(targetSelectors);
+    
+    // Save original styles for restoration
+    elementBodies = [];
+    
+    // 4. Initialize Matter.js Engine & World
+    const { Engine, World, Bodies, Runner, Mouse, MouseConstraint } = Matter;
+    engine = Engine.create();
+    
+    // Set zero gravity explicitly
+    if (engine.gravity) {
+      engine.gravity.y = 0;
+    } else if (engine.world && engine.world.gravity) {
+      engine.world.gravity.y = 0;
+    }
+    
+    const world = engine.world;
+    const viewWidth = window.innerWidth;
+    const viewHeight = window.innerHeight;
+
+    // 5. Create viewport boundary walls so elements are locked inside the screen and can't go outside
+    const wallThickness = 100;
+    const leftWall = Bodies.rectangle(-wallThickness / 2, viewHeight / 2, wallThickness, viewHeight, { isStatic: true });
+    const rightWall = Bodies.rectangle(viewWidth + wallThickness / 2, viewHeight / 2, wallThickness, viewHeight, { isStatic: true });
+    const topWall = Bodies.rectangle(viewWidth / 2, -wallThickness / 2, viewWidth, wallThickness, { isStatic: true });
+    const bottomWall = Bodies.rectangle(viewWidth / 2, viewHeight + wallThickness / 2, viewWidth, wallThickness, { isStatic: true });
+    
+    boundaryBodies = [leftWall, rightWall, topWall, bottomWall];
+    World.add(world, boundaryBodies);
+
+    // 6. Convert DOM elements into Matter bodies
+    elements.forEach((el, index) => {
+      // Get current bounding box relative to viewport
+      const rect = el.getBoundingClientRect();
+      if (rect.width === 0 || rect.height === 0) return; // skip hidden elements
+
+      // Store initial layout style and DOM parent structure
+      const parent = el.parentNode;
+      const nextSibling = el.nextSibling;
+      const originalStyle = {
+        position: el.style.position,
+        left: el.style.left,
+        top: el.style.top,
+        width: el.style.width,
+        height: el.style.height,
+        margin: el.style.margin,
+        transform: el.style.transform,
+        zIndex: el.style.zIndex,
+        transition: el.style.transition
+      };
+
+      // Set fixed viewport bounds
+      el.style.width = `${rect.width}px`;
+      el.style.height = `${rect.height}px`;
+      el.style.left = `${rect.left}px`;
+      el.style.top = `${rect.top}px`;
+      
+      el.classList.add('physics-body-active');
+      
+      // Portal to body to escape parent transforms and offsets
+      document.body.appendChild(el);
+
+      // Create Matter physics body centered at element center
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const body = Bodies.rectangle(cx, cy, rect.width, rect.height, {
+        restitution: 0.75, // bouncy
+        friction: 0.1,
+        frictionAir: 0.025
+      });
+
+      // Link body to DOM element
+      body.domElement = el;
+      elementBodies.push({
+        el: el,
+        body: body,
+        parent: parent,
+        nextSibling: nextSibling,
+        originalStyle: originalStyle
+      });
+
+      World.add(world, body);
+    });
+
+    // 7. Enable dragging
+    const mouse = Mouse.create(document.body);
+    mouseConstraint = MouseConstraint.create(engine, {
+      mouse: mouse,
+      constraint: {
+        stiffness: 0.2,
+        render: { visible: false }
+      }
+    });
+
+    World.add(world, mouseConstraint);
+
+    // 8. Tick updates loop
+    runner = Runner.create();
+    Runner.run(runner, engine);
+
+    Matter.Events.on(engine, 'afterUpdate', () => {
+      elementBodies.forEach(item => {
+        const { el, body } = item;
+        const x = body.position.x - el.offsetWidth / 2;
+        const y = body.position.y - el.offsetHeight / 2;
+        el.style.transform = `translate3d(${x - parseFloat(el.style.left)}px, ${y - parseFloat(el.style.top)}px, 0) rotate(${body.angle}rad)`;
+      });
+
+      // Update custom spawned spheres positions
+      spawnedSpheres.forEach(sphereItem => {
+        const { el, body } = sphereItem;
+        el.style.left = `${body.position.x}px`;
+        el.style.top = `${body.position.y}px`;
+      });
+    });
+
+    // 9. Spawn exactly one big sphere at the start (no click-spawning anymore)
+    spawnSphere(viewWidth / 2, viewHeight / 4);
+  }
+
+  function spawnSphere(x, y) {
+    const { Bodies, World, Body } = Matter;
+    const radius = 24; // 48px diameter (larger sphere)
+
+    // Create DOM element
+    const sphereEl = document.createElement('div');
+    sphereEl.className = 'physics-sphere';
+    document.body.appendChild(sphereEl);
+
+    // Create physical body
+    const sphereBody = Bodies.circle(x, y, radius, {
+      restitution: 0.85,
+      friction: 0.05,
+      density: 0.005
+    });
+
+    // Give it a small starting velocity
+    Body.setVelocity(sphereBody, {
+      x: (Math.random() - 0.5) * 6,
+      y: -5 // throw upwards slightly
+    });
+
+    World.add(engine.world, sphereBody);
+
+    spawnedSpheres.push({
+      el: sphereEl,
+      body: sphereBody
+    });
+  }
+
+  function stopPhysicsPlayground() {
+    physicsActive = false;
+    toggleBtn.classList.remove('active');
+    toggleBtn.innerText = 'Antigravity Mode';
+
+    // 1. Destroy Matter runner and engine
+    if (runner) {
+      Matter.Runner.stop(runner);
+    }
+    if (engine) {
+      Matter.World.clear(engine.world, false);
+      Matter.Engine.clear(engine);
+    }
+
+    // 2. Remove spawned spheres from DOM
+    spawnedSpheres.forEach(item => {
+      if (item.el && item.el.parentNode) {
+        item.el.parentNode.removeChild(item.el);
+      }
+    });
+    spawnedSpheres = [];
+
+    // 3. Restore original styles and layout positions
+    elementBodies.forEach(item => {
+      const { el, parent, nextSibling, originalStyle } = item;
+      el.classList.remove('physics-body-active');
+      
+      // Restore CSS
+      el.style.position = originalStyle.position;
+      el.style.left = originalStyle.left;
+      el.style.top = originalStyle.top;
+      el.style.width = originalStyle.width;
+      el.style.height = originalStyle.height;
+      el.style.margin = originalStyle.margin;
+      el.style.transform = originalStyle.transform;
+      el.style.zIndex = originalStyle.zIndex;
+      el.style.transition = originalStyle.transition;
+      
+      // Put back in original DOM place
+      if (nextSibling) {
+        parent.insertBefore(el, nextSibling);
+      } else {
+        parent.appendChild(el);
+      }
+    });
+
+    elementBodies = [];
+
+    // 4. Restore screen scrolling and position
+    document.body.style.overflow = 'auto';
+    if (window.lenis) {
+      window.lenis.start();
+    }
+    window.scrollTo(0, originalScrollY);
+  }
+
   // Helpers
   function showFeedback(element, message, status) {
     element.innerText = message;

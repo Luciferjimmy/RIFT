@@ -1015,22 +1015,26 @@ code, pre {
 
 /* 14. Footer */
 .footer {
-  background-color: #FFFFFF;
+  background-color: var(--bg-obsidian);
   border-top: 1px solid var(--border-subtle);
-  padding: 80px 0 40px;
+  padding: 80px 0 60px;
   position: relative;
   z-index: 2;
+  overflow: hidden;
 }
 .footer-container {
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 24px;
+  display: flex;
+  flex-direction: column;
 }
-.footer-top {
+.footer-grid {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
   gap: 80px;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
 }
 .footer-brand {
   max-width: 280px;
@@ -1051,10 +1055,10 @@ code, pre {
 }
 .brand-desc {
   font-size: 0.8rem;
-  margin-top: 16px;
+  margin-top: 12px;
   color: var(--text-muted);
 }
-.footer-nav {
+.footer-columns {
   display: flex;
   gap: 80px;
 }
@@ -1081,32 +1085,149 @@ code, pre {
 .footer-nav-col a:hover {
   color: var(--text-primary);
 }
-.social-icon-raw {
+
+/* Orbit social section */
+.footer-orbit-section {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-top: 20px;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.orbit-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1000px;
+  height: 1000px;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.orbit-ring {
+  position: absolute;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  border-radius: 50%;
+}
+.orbit-ring:nth-child(1) {
+  width: 320px;
+  height: 320px;
+}
+.orbit-ring:nth-child(2) {
+  width: 520px;
+  height: 520px;
+}
+.orbit-ring:nth-child(3) {
+  width: 720px;
+  height: 720px;
+}
+.orbit-ring.glow-ring {
+  width: 720px;
+  height: 720px;
+  border: 1px solid transparent;
+  background: linear-gradient(var(--bg-obsidian), var(--bg-obsidian)) padding-box,
+              linear-gradient(90deg, transparent 20%, #4ea8de 45%, #ffd166 55%, transparent 80%) border-box;
+}
+.orbit-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.orbit-title {
+  font-family: var(--font-sans);
   font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
   color: var(--text-muted);
+}
+.orbit-social-buttons {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  align-items: center;
+}
+.orbit-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+  color: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.02);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
+  border: 1px solid var(--border-subtle);
   text-decoration: none;
 }
-.social-icon-raw:hover {
-  color: var(--text-primary);
+.orbit-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.03);
+  border-color: var(--color-primary);
+}
+.orbit-btn svg {
+  transition: transform 0.3s ease;
+}
+.orbit-btn:hover svg {
+  transform: scale(1.05);
 }
 
-.footer-bottom {
-  border-top: 1px solid var(--border-subtle);
-  padding-top: 40px;
+/* Bottom credits section */
+.footer-bottom-new {
+  margin-top: 40px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  gap: 24px;
+  align-items: flex-start;
+  gap: 40px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
 }
-.copyright {
-  font-size: 0.75rem;
-  color: var(--text-dark);
+.footer-bottom-left {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 450px;
+  text-align: left;
 }
-.cosmic-curiosity {
-  font-family: var(--font-serif);
-  font-size: 1rem;
-  font-style: italic;
+.footer-legal-line {
   color: var(--text-primary);
+  line-height: 1.4;
+  margin: 0;
+}
+.sub-legal {
+  color: var(--text-muted);
+  opacity: 0.85;
+}
+.footer-bottom-center {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+}
+.footer-bottom-center a {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition-fast);
+  white-space: nowrap;
+}
+.footer-bottom-center a:hover {
+  opacity: 0.7;
+}
+.footer-bottom-right {
+  width: 250px;
 }
 
 /* ==========================================================================
@@ -1827,6 +1948,101 @@ code, pre {
   flex: 1;
 }
 
+/* 17. Physics Playground Styles */
+.physics-control-panel {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  font-family: var(--font-sans);
+}
+
+.physics-toggle-btn {
+  background-color: #000000;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.physics-toggle-btn:hover {
+  transform: scale(1.05) translateY(-2px);
+  background-color: #111111;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+}
+
+.physics-toggle-btn.active {
+  background-color: #FF3B30;
+  border-color: transparent;
+  color: #FFFFFF;
+  box-shadow: 0 10px 25px rgba(255, 59, 48, 0.4);
+}
+
+.physics-hint {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 6px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.physics-control-panel:hover .physics-hint,
+.physics-toggle-btn.active + .physics-hint {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.physics-sphere {
+  position: fixed;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #FF6B6B 0%, #FF3B30 60%, #990000 100%);
+  box-shadow: 0 8px 25px rgba(255, 59, 48, 0.5), inset 0 -4px 10px rgba(0,0,0,0.3), inset 0 4px 10px rgba(255,255,255,0.4);
+  pointer-events: auto;
+  z-index: 9997;
+  transform: translate(-50%, -50%);
+  cursor: grab;
+}
+
+.physics-sphere:active {
+  cursor: grabbing;
+}
+
+/* Helper class applied to elements while physics is active */
+.physics-body-active {
+  position: fixed !important;
+  margin: 0 !important;
+  z-index: 9995 !important;
+  will-change: transform !important;
+  /* Disable any transition animations while the physics engine is updating transforms */
+  transition: none !important;
+  animation: none !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25) !important;
+  user-select: none !important;
+  -webkit-user-drag: none !important;
+}
+
 /* 16. Responsiveness Constraints (RWD) */
 @media (max-width: 1024px) {
   .hero-title { font-size: 3.8rem; }
@@ -1846,7 +2062,9 @@ code, pre {
   .bento-grid { grid-template-columns: 1fr; }
   .bento-w-2, .bento-w-3 { grid-column: span 1; }
   .faq-grid { grid-template-columns: 1fr; gap: 30px; }
-  .footer-top { flex-direction: column; gap: 40px; }
-  .footer-nav { flex-wrap: wrap; gap: 40px; }
-  .footer-bottom { flex-direction: column-reverse; text-align: center; gap: 16px; }
+  .footer-grid { flex-direction: column; gap: 40px; align-items: center; text-align: center; }
+  .footer-columns { justify-content: center; width: 100%; }
+  .footer-bottom-new { flex-direction: column; align-items: center; text-align: center; gap: 24px; }
+  .footer-bottom-left { text-align: center; align-items: center; }
+  .footer-bottom-right { display: none; }
 }
