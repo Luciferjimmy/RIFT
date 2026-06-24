@@ -151,6 +151,85 @@ document.addEventListener('DOMContentLoaded', () => {
         card.classList.remove('active');
       }
     });
+
+    // Trigger custom animations inside each launcher mockup card
+    if (stepNum === 1) {
+      // Step 1: Account sync logs stagger fade-in
+      const syncLines = document.querySelectorAll('#visual-step-1 .sync-line');
+      gsap.killTweensOf(syncLines);
+      // Reset
+      gsap.set(syncLines, { opacity: 0, y: 5 });
+      // Animate
+      gsap.to(syncLines, {
+        opacity: (index, target) => target.classList.contains('text-dim') ? 0.45 : 1,
+        y: 0,
+        stagger: 0.25,
+        duration: 0.4,
+        ease: 'power2.out',
+        delay: 0.2
+      });
+    } else if (stepNum === 2) {
+      // Step 2: Store grid items stagger pop-in
+      const discoverCards = document.querySelectorAll('#visual-step-2 .discover-card');
+      gsap.killTweensOf(discoverCards);
+      // Reset
+      gsap.set(discoverCards, { opacity: 0, scale: 0.95, y: 8 });
+      // Animate
+      gsap.to(discoverCards, {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        stagger: 0.08,
+        duration: 0.4,
+        ease: 'back.out(1.1)',
+        delay: 0.15
+      });
+    } else if (stepNum === 3) {
+      // Step 3: Library PLAY button press & launch console typing/fade-in
+      const playBtn = document.querySelector('#visual-step-3 .library-play-btn');
+      const playLines = document.querySelectorAll('#visual-step-3 .play-line');
+      
+      gsap.killTweensOf([playBtn, playLines]);
+      
+      // Reset PLAY button to default white style
+      gsap.set(playBtn, { 
+        backgroundColor: '#FFFFFF', 
+        color: '#000000', 
+        borderColor: 'transparent',
+        boxShadow: '0 0 8px rgba(255, 255, 255, 0.15)',
+        textShadow: 'none',
+        textContent: '▶ PLAY'
+      });
+      playBtn.innerText = '▶ PLAY';
+      
+      // Reset console lines
+      gsap.set(playLines, { opacity: 0, x: -5 });
+      
+      // Create animation timeline
+      const tl = gsap.timeline({ delay: 0.2 });
+      
+      // 1. Simulate button hover/press animation
+      tl.to(playBtn, { scale: 0.94, duration: 0.1, ease: 'sine.inOut' })
+        .to(playBtn, { 
+          scale: 1, 
+          backgroundColor: '#00DF6C', 
+          color: '#0A0A0F', 
+          boxShadow: '0 0 15px rgba(0, 223, 108, 0.6)', 
+          duration: 0.15,
+          onComplete: () => {
+            playBtn.innerText = '● RUNNING';
+          }
+        });
+      
+      // 2. Fade in WINE logs sequentially
+      tl.to(playLines, {
+        opacity: 1,
+        x: 0,
+        stagger: 0.3,
+        duration: 0.3,
+        ease: 'power2.out'
+      }, "+=0.15");
+    }
   }
 
   /* ------------------------------------------------------------------------

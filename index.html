@@ -194,25 +194,68 @@
               
               <!-- Card 1 Visual: Connect Libraries -->
               <div class="scrolly-card active" id="visual-step-1">
-                <div class="scrolly-card-header">
-                  <span class="scrolly-dot red"></span>
-                  <span class="scrolly-dot yellow"></span>
-                  <span class="scrolly-dot green"></span>
-                  <span class="scrolly-card-title">LibraryManager.swift</span>
-                </div>
-                <div class="scrolly-card-body">
-                  <div class="chat-row user">
-                    <span class="chat-avatar font-mono">></span>
-                    <p class="chat-text">Connect my Steam and Epic libraries.</p>
+                <div class="launcher-mockup">
+                  <!-- macOS Header -->
+                  <div class="launcher-header">
+                    <div class="window-controls">
+                      <span class="control-dot close"></span>
+                      <span class="control-dot minimize"></span>
+                      <span class="control-dot maximize"></span>
+                    </div>
+                    <div class="launcher-search">Search store, library...</div>
+                    <div class="launcher-actions">
+                      <span class="action-icon">🛒</span>
+                      <span class="action-icon notification">🔔<span class="badge-dot"></span></span>
+                      <span class="launcher-avatar"></span>
+                    </div>
                   </div>
-                  <div class="chat-row rift">
-                    <span class="chat-avatar brand">❖</span>
-                    <div class="chat-text-area">
-                      <p class="chat-text font-mono">Scanning cloud manifests...</p>
-                      <div class="sync-grid">
-                        <div class="sync-item"><span class="check-icon">✓</span> Epic Games (142 games found)</div>
-                        <div class="sync-item"><span class="check-icon">✓</span> Steam Cloud (389 games found)</div>
-                        <div class="sync-item"><span class="check-icon">✓</span> 531 titles ready to catalog</div>
+                  
+                  <div class="launcher-body">
+                    <!-- Sidebar Navigation -->
+                    <div class="launcher-sidebar">
+                      <div class="sidebar-logo">
+                        <span class="logo-icon">❖</span>
+                        <span class="logo-text">RIFT</span>
+                      </div>
+                      <div class="sidebar-menu">
+                        <div class="sidebar-link">🏠 Discover</div>
+                        <div class="sidebar-link">📦 Library</div>
+                        <div class="sidebar-link active">⚙️ Settings</div>
+                      </div>
+                      <div class="sidebar-divider"></div>
+                      <div class="sidebar-section-title">QUICK LAUNCH</div>
+                      <div class="sidebar-quick-launch-empty">Connect accounts</div>
+                    </div>
+                    
+                    <!-- Main Content -->
+                    <div class="launcher-main">
+                      <h4 class="launcher-tab-title">Connect your libraries</h4>
+                      
+                      <div class="sync-card-container">
+                        <!-- Steam Card -->
+                        <div class="sync-card">
+                          <div class="sync-card-header">
+                            <span class="sync-platform steam">🎮 Steam Cloud</span>
+                            <span class="sync-badge connected">Connected</span>
+                          </div>
+                          <p class="sync-status-text">✓ 389 games found</p>
+                        </div>
+                        
+                        <!-- Epic Card -->
+                        <div class="sync-card">
+                          <div class="sync-card-header">
+                            <span class="sync-platform epic">🎮 Epic Games</span>
+                            <span class="sync-badge connected">Connected</span>
+                          </div>
+                          <p class="sync-status-text">✓ 142 games found</p>
+                        </div>
+                      </div>
+                      
+                      <div class="sync-console-output">
+                        <div class="console-line sync-line text-dim">❖ Scanning cloud manifests...</div>
+                        <div class="console-line sync-line text-green">✓ Epic Games (142 games found)</div>
+                        <div class="console-line sync-line text-green">✓ Steam Cloud (389 games found)</div>
+                        <div class="console-line sync-line text-highlight">✓ 531 titles ready to catalog</div>
                       </div>
                     </div>
                   </div>
@@ -221,25 +264,73 @@
 
               <!-- Card 2 Visual: Compatibility ratings -->
               <div class="scrolly-card" id="visual-step-2">
-                <div class="scrolly-card-header">
-                  <span class="scrolly-dot red"></span>
-                  <span class="scrolly-dot yellow"></span>
-                  <span class="scrolly-dot green"></span>
-                  <span class="scrolly-card-title">CatalogManager.swift</span>
-                </div>
-                <div class="scrolly-card-body">
-                  <div class="chat-row user">
-                    <span class="chat-avatar font-mono">></span>
-                    <p class="chat-text">Show specs for Elden Ring on M3 Mac.</p>
+                <div class="launcher-mockup">
+                  <!-- macOS Header -->
+                  <div class="launcher-header">
+                    <div class="window-controls">
+                      <span class="control-dot close"></span>
+                      <span class="control-dot minimize"></span>
+                      <span class="control-dot maximize"></span>
+                    </div>
+                    <div class="launcher-search">Search store, library...</div>
+                    <div class="launcher-actions">
+                      <span class="action-icon">🛒</span>
+                      <span class="action-icon notification">🔔<span class="badge-dot"></span></span>
+                      <span class="launcher-avatar"></span>
+                    </div>
                   </div>
-                  <div class="chat-row rift">
-                    <span class="chat-avatar brand">❖</span>
-                    <div class="chat-text-area">
-                      <p class="chat-text">Elden Ring verified compat profile found.</p>
-                      <pre class="font-mono"><code>Compat rating: Platinum
-Translation: D3DMetal (DirectX 12 -> Metal)
-Shader cache: Pre-compiled cache available (1.2 GB)
-Target performance: 60 FPS (stable frame pacing)</code></pre>
+                  
+                  <div class="launcher-body">
+                    <!-- Sidebar Navigation -->
+                    <div class="launcher-sidebar">
+                      <div class="sidebar-logo">
+                        <span class="logo-icon">❖</span>
+                        <span class="logo-text">RIFT</span>
+                      </div>
+                      <div class="sidebar-menu">
+                        <div class="sidebar-link active">🏠 Discover</div>
+                        <div class="sidebar-link">📦 Library</div>
+                        <div class="sidebar-link">⚙️ Settings</div>
+                      </div>
+                      <div class="sidebar-divider"></div>
+                      <div class="sidebar-section-title">QUICK LAUNCH</div>
+                      <div class="sidebar-quick-launch-empty">Connect accounts</div>
+                    </div>
+                    
+                    <!-- Main Content -->
+                    <div class="launcher-main">
+                      <h4 class="launcher-tab-title">Verified Catalog</h4>
+                      
+                      <div class="discover-grid">
+                        <div class="discover-card">
+                          <div class="discover-card-img" style="background-image: url('https://cdn.akamai.steamstatic.com/steam/apps/1245620/header.jpg');"></div>
+                          <div class="discover-card-info">
+                            <h5>Elden Ring</h5>
+                            <span class="badge compat-platinum">Platinum • D3DMetal</span>
+                          </div>
+                        </div>
+                        <div class="discover-card">
+                          <div class="discover-card-img" style="background-image: url('https://cdn.akamai.steamstatic.com/steam/apps/1091500/header.jpg');"></div>
+                          <div class="discover-card-info">
+                            <h5>Cyberpunk 2077</h5>
+                            <span class="badge compat-gold">Gold • DX12</span>
+                          </div>
+                        </div>
+                        <div class="discover-card">
+                          <div class="discover-card-img" style="background-image: url('https://cdn.akamai.steamstatic.com/steam/apps/1721470/header.jpg');"></div>
+                          <div class="discover-card-info">
+                            <h5>Poppy Playtime</h5>
+                            <span class="badge compat-platinum">Platinum • DX11</span>
+                          </div>
+                        </div>
+                        <div class="discover-card">
+                          <div class="discover-card-img" style="background-image: url('https://cdn.akamai.steamstatic.com/steam/apps/271590/header.jpg');"></div>
+                          <div class="discover-card-info">
+                            <h5>GTA V</h5>
+                            <span class="badge compat-platinum">Platinum • DX11</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -247,26 +338,59 @@ Target performance: 60 FPS (stable frame pacing)</code></pre>
 
               <!-- Card 3 Visual: One click play -->
               <div class="scrolly-card" id="visual-step-3">
-                <div class="scrolly-card-header">
-                  <span class="scrolly-dot red"></span>
-                  <span class="scrolly-dot yellow"></span>
-                  <span class="scrolly-dot green"></span>
-                  <span class="scrolly-card-title">GameSandbox.swift</span>
-                </div>
-                <div class="scrolly-card-body">
-                  <div class="chat-row user">
-                    <span class="chat-avatar font-mono">></span>
-                    <p class="chat-text">Launch Elden Ring.</p>
+                <div class="launcher-mockup">
+                  <!-- macOS Header -->
+                  <div class="launcher-header">
+                    <div class="window-controls">
+                      <span class="control-dot close"></span>
+                      <span class="control-dot minimize"></span>
+                      <span class="control-dot maximize"></span>
+                    </div>
+                    <div class="launcher-search">Search store, library...</div>
+                    <div class="launcher-actions">
+                      <span class="action-icon">🛒</span>
+                      <span class="action-icon notification">🔔<span class="badge-dot"></span></span>
+                      <span class="launcher-avatar"></span>
+                    </div>
                   </div>
-                  <div class="chat-row rift">
-                    <span class="chat-avatar brand">❖</span>
-                    <div class="chat-text-area">
-                      <p class="chat-text">Initializing isolated game prefix...</p>
-                      <pre class="font-mono"><code>WINEPREFIX sandboxed: OK
-Loading pre-compiled shader cache... Done (0.1s)
-Injecting Metal translation layer... Done
-Controller bindings loaded: Xbox / DualSense active
-Launching eldenring.exe... [RUNNING]</code></pre>
+                  
+                  <div class="launcher-body">
+                    <!-- Sidebar Navigation -->
+                    <div class="launcher-sidebar">
+                      <div class="sidebar-logo">
+                        <span class="logo-icon">❖</span>
+                        <span class="logo-text">RIFT</span>
+                      </div>
+                      <div class="sidebar-menu">
+                        <div class="sidebar-link">🏠 Discover</div>
+                        <div class="sidebar-link active">📦 Library</div>
+                        <div class="sidebar-link">⚙️ Settings</div>
+                      </div>
+                      <div class="sidebar-divider"></div>
+                      <div class="sidebar-section-title">QUICK LAUNCH</div>
+                      <div class="sidebar-quick-launch">
+                        <div class="quick-launch-item active">🎮 Elden Ring</div>
+                        <div class="quick-launch-item">🎮 Poppy Playtime</div>
+                      </div>
+                    </div>
+                    
+                    <!-- Main Content -->
+                    <div class="launcher-main library">
+                      <div class="library-detail-header">
+                        <div class="library-game-img" style="background-image: url('https://cdn.akamai.steamstatic.com/steam/apps/1245620/header.jpg');"></div>
+                        <div class="library-game-meta">
+                          <h5>Elden Ring</h5>
+                          <p class="text-dim">Ready to play</p>
+                          <div class="library-play-btn">▶ PLAY</div>
+                        </div>
+                      </div>
+                      
+                      <div class="library-console-output">
+                        <div class="console-line play-line">WINEPREFIX sandboxed: OK</div>
+                        <div class="console-line play-line">Loading pre-compiled shader cache... Done (0.1s)</div>
+                        <div class="console-line play-line">Injecting Metal translation layer... Done</div>
+                        <div class="console-line play-line text-highlight">Launching eldenring.exe... [RUNNING]</div>
+                      </div>
                     </div>
                   </div>
                 </div>
