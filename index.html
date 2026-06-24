@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RIFT | The launcher that works for you.</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="RIFT is a native macOS game launcher & store that integrates Wine, GPTK, and DXVK to run DirectX 11/12 Windows games on Apple Silicon with 1-click installer ease. Secure beta access today.">
+  <meta name="keywords" content="macOS gaming, Apple Silicon, Wine, GPTK, DXVK, Game Launcher, Mac DX12 translation, Mac gaming, RIFT game store">
+  <meta name="author" content="RIFT Team">
+  <meta property="og:title" content="RIFT | The launcher that works for you.">
+  <meta property="og:description" content="RIFT integrates Wine, GPTK, and DXVK to run DirectX 11/12 Windows games on Apple Silicon with 1-click ease. Join the waitlist.">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts: Instrument Serif (Editorial Serif) & Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- Lenis CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.20/dist/lenis.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Custom Cursor Followers (Super clean B&W style) -->
+  <div id="cursor-follower" class="cursor-follower"></div>
+  <div id="cursor-follower-glow" class="cursor-follower-glow"></div>
+
+  <!-- Floating Sticky Header -->
+  <header class="header" id="main-header">
+    <div class="header-container">
+      <a href="#" class="logo" id="logo-link">
+        <span class="logo-icon">❖</span>
+        <span class="logo-text">rift</span>
+      </a>
+      <nav class="nav-links" aria-label="Main Navigation">
+        <a href="#pipeline" class="nav-link" id="nav-pipeline">Pipeline</a>
+        <a href="#games" class="nav-link" id="nav-games">Games</a>
+        <a href="#features" class="nav-link" id="nav-features">Features</a>
+      </nav>
+      <div class="header-actions">
+        <a href="#waitlist" class="btn btn-secondary btn-sm" id="header-cta">Join Waitlist</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+      
+      <!-- Ambient 3D spheres floating in background (Lando/Comet style) -->
+      <img src="assets/sphere_teal.png" alt="" class="bg-sphere sphere-left" id="bg-sphere-left">
+      <img src="assets/sphere_coral.png" alt="" class="bg-sphere sphere-right" id="bg-sphere-right">
+      <div class="bg-sphere sphere-top" id="bg-sphere-top"></div>
+      
+      <div class="hero-container">
+        
+        <!-- Center-aligned minimal hero -->
+        <div class="hero-intro-text">
+          <p class="hero-meta-lead">A new game launcher from <a href="#pipeline" class="meta-link">rift</a></p>
+          
+          <h1 class="hero-title" id="hero-headline">
+            The launcher that<br>works for you
+          </h1>
+          
+          <p class="hero-subtitle" id="hero-subtext">
+            Available for macOS (Apple Silicon)
+          </p>
+
+          <!-- Download waitlist pill trigger button -->
+          <div class="hero-cta-wrapper">
+            <a href="#waitlist" class="btn btn-primary" id="hero-submit-btn">
+              <svg class="btn-dl-icon" viewBox="0 0 24 24" fill="none"><path d="M12 15V3M12 15L8 11M12 15L16 11M5 17H19V19H5V17Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>Download RIFT Beta</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Premium Launcher Mockup (reskinned in super clean light mode) -->
+        <div class="mockup-wrapper" id="hero-mockup">
+          <div class="mockup-frame">
+            <div class="mockup-header">
+              <div class="window-controls">
+                <span class="control-dot close"></span>
+                <span class="control-dot minimize"></span>
+                <span class="control-dot maximize"></span>
+              </div>
+              <div class="mockup-search">❖ Search game catalog, libraries...</div>
+              <div class="mockup-actions">
+                <span class="mockup-icon">🛒</span>
+                <span class="mockup-icon">🔔</span>
+                <span class="mockup-avatar"></span>
+              </div>
+            </div>
+            <div class="mockup-body">
+              <div class="mockup-sidebar">
+                <div class="sidebar-item active">🏠 Discover</div>
+                <div class="sidebar-item">📦 Library</div>
+                <div class="sidebar-item">⚙️ Settings</div>
+                <div class="sidebar-divider"></div>
+                <div class="sidebar-title">PLATFORMS</div>
+                <div class="sidebar-item">🎮 Epic Games</div>
+                <div class="sidebar-item">🎮 Steam Cloud</div>
+              </div>
+              <div class="mockup-main">
+                <div class="mockup-hero">
+                  <div class="mockup-hero-details">
+                    <span class="category-tag">PLATINUM COMPATIBILITY</span>
+                    <h2>Poppy Playtime: Chapter 1</h2>
+                    <p>Unreal Engine 5.2 • 60 FPS • DirectX 11/12 Translation</p>
+                    <div class="mockup-hero-buttons">
+                      <span class="mockup-btn play">▶ Launch</span>
+                      <span class="mockup-btn info">Specs</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="mockup-grid">
+                  <div class="mockup-card">
+                    <div class="card-img-placeholder eld"></div>
+                    <div class="card-desc">
+                      <h4>Elden Ring</h4>
+                      <p>D3DMetal • Platinum</p>
+                    </div>
+                  </div>
+                  <div class="mockup-card">
+                    <div class="card-img-placeholder cyb"></div>
+                    <div class="card-desc">
+                      <h4>Cyberpunk 2077</h4>
+                      <p>DX12 • Gold</p>
+                    </div>
+                  </div>
+                  <div class="mockup-card">
+                    <div class="card-img-placeholder gta"></div>
+                    <div class="card-desc">
+                      <h4>GTA V</h4>
+                      <p>DX11 • Platinum</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- Scrollytelling Section ("Do anything with RIFT") -->
+    <section class="pipeline-section" id="pipeline">
+      <div class="section-container">
+        
+        <div class="pipeline-title-wrapper">
+          <h2 class="pipeline-section-title">Do anything with RIFT</h2>
+        </div>
+
+        <div class="scrolly-container">
+          
+          <!-- Column 1: Graphic / Visual Prompt Mockups (Sticky) -->
+          <div class="scrolly-visual-sticky">
+            <div class="scrolly-visual-wrapper">
+              
+              <!-- Card 1 Visual: Translate Prompt -->
+              <div class="scrolly-card active" id="visual-step-1">
+                <div class="scrolly-card-header">
+                  <span class="scrolly-dot red"></span>
+                  <span class="scrolly-dot yellow"></span>
+                  <span class="scrolly-dot green"></span>
+                  <span class="scrolly-card-title">rift-assistant.sh</span>
+                </div>
+                <div class="scrolly-card-body">
+                  <div class="chat-row user">
+                    <span class="chat-avatar font-mono">></span>
+                    <p class="chat-text">How are DirectX 12 calls handled on Mac?</p>
+                  </div>
+                  <div class="chat-row rift">
+                    <span class="chat-avatar brand">❖</span>
+                    <div class="chat-text-area">
+                      <p class="chat-text font-mono">D3DMetal translation active.</p>
+                      <pre class="font-mono"><code>Translating shaders...
+Metal Shading Language (MSL) compile: OK
+Target frame latency: Stable (55 FPS)</code></pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 2 Visual: Sandbox Prefixes -->
+              <div class="scrolly-card" id="visual-step-2">
+                <div class="scrolly-card-header">
+                  <span class="scrolly-dot red"></span>
+                  <span class="scrolly-dot yellow"></span>
+                  <span class="scrolly-dot green"></span>
+                  <span class="scrolly-card-title">SetupManager.swift</span>
+                </div>
+                <div class="scrolly-card-body">
+                  <div class="chat-row user">
+                    <span class="chat-avatar font-mono">></span>
+                    <p class="chat-text">Configure Elden Ring sandbox prefix.</p>
+                  </div>
+                  <div class="chat-row rift">
+                    <span class="chat-avatar brand">❖</span>
+                    <div class="chat-text-area">
+                      <p class="chat-text">Isolating prefixes under Sandbox environments.</p>
+                      <div class="scrolly-progress-wrapper">
+                        <span class="progress-label">Prefix Extraction</span>
+                        <div class="progress-bar-bg"><div class="progress-bar-fill fill-90"></div></div>
+                        <span class="progress-percent">90%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 3 Visual: Library Sync -->
+              <div class="scrolly-card" id="visual-step-3">
+                <div class="scrolly-card-header">
+                  <span class="scrolly-dot red"></span>
+                  <span class="scrolly-dot yellow"></span>
+                  <span class="scrolly-dot green"></span>
+                  <span class="scrolly-card-title">ProfileManager.swift</span>
+                </div>
+                <div class="scrolly-card-body">
+                  <div class="chat-row user">
+                    <span class="chat-avatar font-mono">></span>
+                    <p class="chat-text">Sync my local achievements and game saves.</p>
+                  </div>
+                  <div class="chat-row rift">
+                    <span class="chat-avatar brand">❖</span>
+                    <div class="chat-text-area">
+                      <p class="chat-text">Retrieving manifest arrays from Epic & Steam...</p>
+                      <div class="sync-grid">
+                        <div class="sync-item"><span class="check-icon">✓</span> Steam Cloud</div>
+                        <div class="sync-item"><span class="check-icon">✓</span> Epic Games Store</div>
+                        <div class="sync-item"><span class="check-icon">✓</span> Local manifests</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Column 2: Step Descriptions (Scrollable) -->
+          <div class="scrolly-descriptions">
+            
+            <!-- Step 1 -->
+            <div class="scrolly-desc-block" data-step="1" id="step-1">
+              <h3 class="step-title-lead">AI that translates</h3>
+              <h4 class="step-title">DirectX to Metal, dynamically</h4>
+              <p class="step-description-text">
+                DirectX 11/12 graphics commands are compiled directly into Apple Metal instructions. No stuttering, zero visual translation lag. RIFT uses custom MoltenVK and D3DMetal wrappers to lock consistent frame pacing on Apple Silicon.
+              </p>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="scrolly-desc-block" data-step="2" id="step-2">
+              <h3 class="step-title-lead">AI that installs</h3>
+              <h4 class="step-title">Isolated prefix sandboxing</h4>
+              <p class="step-description-text">
+                Every game lives in a custom, clean container prefix. RIFT handles registry flags, environment overrides, and VC++ dependencies in the background, allowing 1-click game boots.
+              </p>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="scrolly-desc-block" data-step="3" id="step-3">
+              <h3 class="step-title-lead">AI that syncs</h3>
+              <h4 class="step-title">Automatic library synthesis</h4>
+              <p class="step-description-text">
+                RIFT automatically scans your local files and cross-references them with Steam and Epic APIs. It connects cloud backups and credentials seamlessly without requiring third-party plugins.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Endless Game Carousel Section -->
+    <section class="games-section" id="games">
+      <div class="section-container">
+        <h2 class="section-title">Tested & Platinum Rated</h2>
+      </div>
+
+      <!-- Endless Carousel Track -->
+      <div class="games-carousel-wrapper">
+        <div class="games-track" id="games-track-forward">
+          <!-- Game Card 1 -->
+          <div class="game-card">
+            <div class="game-card-img" style="background-image: url('https://cdn.akamai.steamstatic.com/steam/apps/1245620/header.jpg');"></div>
+            <div class="game-card-info">
+              <h3>Elden Ring</h3>
+              <p>55-60 FPS • D3DMetal</p>
+            </div>
+          </div>
+          <!-- Game Card 2 -->
+          <div class="game-card">
+            <div class="game-card-img" style="background-image: url('https://cdn.akamai.steamstatic.com/steam/apps/1091500/header.jpg');"></div>
+            <div class="game-card-info">
+              <h3>Cyberpunk 2077</h3>
+              <p>45-50 FPS • DX12</p>
+            </div>
+          </div>
+          <!-- Game Card 3 -->
+          <div class="game-card">
+            <div class="game-card-img" style="background-image: url('https://cdn.akamai.steamstatic.com/steam/apps/1817130/header.jpg');"></div>
+            <div class="game-card-info">
+              <h3>Poppy Playtime</h3>
+              <p>60 FPS • DX11</p>
+            </div>
+          </div>
+          <!-- Game Card 4 -->
+          <div class="game-card">
+            <div class="game-card-img" style="background-image: url('https://cdn.akamai.steamstatic.com/steam/apps/271590/header.jpg');"></div>
+            <div class="game-card-info">
+              <h3>GTA V</h3>
+              <p>60 FPS • DX11</p>
+            </div>
+          </div>
+          <!-- Game Card 5 -->
+          <div class="game-card">
+            <div class="game-card-img" style="background-image: url('https://cdn.akamai.steamstatic.com/steam/apps/1174180/header.jpg');"></div>
+            <div class="game-card-info">
+              <h3>Red Dead Redemption 2</h3>
+              <p>40-50 FPS • Vulkan</p>
+            </div>
+          </div>
+          
+          <!-- Duplicate Cards for Infinite Scroll Effect -->
+          <div class="game-card">
+            <div class="game-card-img" style="background-image: url('https://cdn.akamai.steamstatic.com/steam/apps/1245620/header.jpg');"></div>
+            <div class="game-card-info">
+              <h3>Elden Ring</h3>
+              <p>55-60 FPS • D3DMetal</p>
+            </div>
+          </div>
+          <div class="game-card">
+            <div class="game-card-img" style="background-image: url('https://cdn.akamai.steamstatic.com/steam/apps/1091500/header.jpg');"></div>
+            <div class="game-card-info">
+              <h3>Cyberpunk 2077</h3>
+              <p>45-50 FPS • DX12</p>
+            </div>
+          </div>
+          <div class="game-card">
+            <div class="game-card-img" style="background-image: url('https://cdn.akamai.steamstatic.com/steam/apps/1817130/header.jpg');"></div>
+            <div class="game-card-info">
+              <h3>Poppy Playtime</h3>
+              <p>60 FPS • DX11</p>
+            </div>
+          </div>
+          <div class="game-card">
+            <div class="game-card-img" style="background-image: url('https://cdn.akamai.steamstatic.com/steam/apps/271590/header.jpg');"></div>
+            <div class="game-card-info">
+              <h3>GTA V</h3>
+              <p>60 FPS • DX11</p>
+            </div>
+          </div>
+          <div class="game-card">
+            <div class="game-card-img" style="background-image: url('https://cdn.akamai.steamstatic.com/steam/apps/1174180/header.jpg');"></div>
+            <div class="game-card-info">
+              <h3>Red Dead Redemption 2</h3>
+              <p>40-50 FPS • Vulkan</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Bento Features Grid Section -->
+    <section class="features-section" id="features">
+      <div class="section-container">
+        
+        <div class="section-header text-center">
+          <h2 class="section-title">Engineered for speed</h2>
+          <p class="section-desc">RIFT encapsulates native macOS application components inside a lightweight Swift framework.</p>
+        </div>
+
+        <div class="bento-grid">
+          
+          <!-- Bento Card 1: SetupManager -->
+          <div class="bento-card bento-w-2" id="bento-setup">
+            <div class="bento-card-content">
+              <h3>1-Click Environment Setup</h3>
+              <p>SetupManager automates extraction, scans SHA256 integrity, and ensures Wine Staging packages match local checksum requirements automatically, bypassing system gatekeepers safely.</p>
+            </div>
+          </div>
+
+          <!-- Bento Card 2: Security check -->
+          <div class="bento-card" id="bento-security">
+            <div class="bento-card-content">
+              <h3>Anti-Debug Core</h3>
+              <p>Advanced security modules block kernel debug attachments like LLDB during game runs to prevent visual crashes and protect execution integrity.</p>
+            </div>
+          </div>
+
+          <!-- Bento Card 3: DownloadManager -->
+          <div class="bento-card" id="bento-downloads">
+            <div class="bento-card-content">
+              <h3>32-Thread Downpours</h3>
+              <p>Our download engine maximizes parallel downloading, using regex logic to pull real-time speeds and progress percentages directly from legendary processes.</p>
+            </div>
+          </div>
+
+          <!-- Bento Card 4: ProfileManager -->
+          <div class="bento-card bento-w-2" id="bento-profile">
+            <div class="bento-card-content">
+              <h3>Steam Cloud Sync</h3>
+              <p>Scan local drives for Steam manifests, automatically compile library mappings, and sync details with cloud services via lightweight native API engines.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Waitlist Sign Up Section (Super clean Comet style) -->
+    <section class="waitlist-section" id="waitlist">
+      <div class="section-container">
+        
+        <div class="waitlist-card">
+          <div class="waitlist-content">
+            <h2 class="serif-title">Secure your beta access</h2>
+            <p class="waitlist-subtitle">Get notified as soon as RIFT Beta v1 releases. Slots are opened in weekly batches.</p>
+            
+            <form class="waitlist-form" id="footer-signup-form" novalidate>
+              <div class="form-row">
+                <div class="input-wrapper">
+                  <input type="text" placeholder="Your Name" class="form-input" id="waitlist-name" autocomplete="name">
+                  <div class="input-glow"></div>
+                </div>
+                <div class="input-wrapper">
+                  <input type="email" placeholder="Your Email" class="form-input" id="waitlist-email" required autocomplete="email">
+                  <div class="input-glow"></div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block" id="waitlist-submit-btn">
+                <span>Request Invitation</span>
+              </button>
+            </form>
+
+            <div class="waitlist-success-view" id="waitlist-success-box">
+              <div class="success-portal">
+                <div class="success-ring"></div>
+                <div class="success-ring-inner"></div>
+                <div class="success-checkmark">✓</div>
+              </div>
+              <h3>You are in the RIFT</h3>
+              <p>Your invitation request has been logged. We've sent a verification link to <span class="highlight-email" id="success-email-display">user@example.com</span>.</p>
+            </div>
+
+            <div class="form-message" id="waitlist-form-feedback"></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Sleek Minimal Footer -->
+  <footer class="footer" id="main-footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <span class="logo-icon">❖</span>
+          <span class="brand-name">rift</span>
+          <p class="brand-desc">Orchestrating DirectX translation layers on macOS natively.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-nav-col">
+            <h4>Technology</h4>
+            <a href="#pipeline">Wine sandboxing</a>
+            <a href="#pipeline">D3DMetal Translation</a>
+            <a href="#pipeline">Rosetta 2 Signing</a>
+          </div>
+          <div class="footer-nav-col">
+            <h4>App Services</h4>
+            <a href="#features">SetupManager</a>
+            <a href="#features">DownloadManager</a>
+            <a href="#features">Security Layer</a>
+          </div>
+          <div class="footer-nav-col">
+            <h4>Follow RIFT</h4>
+            <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://discord.com" target="_blank" rel="noopener">Discord</a>
+            <a href="#" class="social-icon-raw">Twitter / X</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="copyright">&copy; 2026 RIFT App. Engineered for Apple Silicon. Not affiliated with Apple Inc. or WineHQ.</p>
+        <p class="cosmic-curiosity">cosmic curiosity</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- GSAP & ScrollTrigger CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  
+  <!-- Lenis Smooth Scroll JS -->
+  <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+  
+  <!-- Custom JS Modules -->
+  <script src="cursor.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
