@@ -236,9 +236,10 @@ code, pre {
   display: block;
 }
 .logo-text {
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  font-size: 1.2rem;
+  font-family: 'Syncopate', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  font-size: 1rem;
 }
 .nav-links {
   display: flex;
@@ -1005,8 +1006,10 @@ code, pre {
   gap: 8px;
 }
 .brand-name {
-  font-weight: 800;
-  font-size: 1.3rem;
+  font-family: 'Syncopate', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  font-size: 1.1rem;
   color: var(--text-primary);
 }
 .brand-desc {
