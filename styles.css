@@ -58,9 +58,18 @@ body {
 
 /* Hide default system OS cursor on desktops where custom cursor is active */
 @media (pointer: fine) {
-  *, *::before, *::after {
+  html, body, *, *::before, *::after {
     cursor: none !important;
   }
+}
+
+/* Also hide cursor via JS class trigger as a robust fallback across all desktop environments */
+html.custom-cursor-active,
+html.custom-cursor-active body,
+html.custom-cursor-active *,
+html.custom-cursor-active *::before,
+html.custom-cursor-active *::after {
+  cursor: none !important;
 }
 
 /* Standard Scrollbar styling */

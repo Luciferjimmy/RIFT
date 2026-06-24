@@ -28,6 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
+  // Enable custom cursor styles by adding active class to document root
+  document.documentElement.classList.add('custom-cursor-active');
+
   // Mouse move listener
   window.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
