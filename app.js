@@ -252,30 +252,35 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Direct HTTP POST to Supabase REST API
-    const tableUrl = `${SUPABASE_CONFIG.url}/rest/v1/waitlist`;
-    fetch(tableUrl, {
+    // Direct HTTP POST to Supabase secure RPC function
+    const rpcUrl = `${SUPABASE_CONFIG.url}/rest/v1/rpc/join_waitlist`;
+    fetch(rpcUrl, {
       method: 'POST',
       headers: {
         'apikey': SUPABASE_CONFIG.anonKey,
         'Authorization': `Bearer ${SUPABASE_CONFIG.anonKey}`,
-        'Content-Type': 'application/json',
-        'Prefer': 'return=minimal'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        name: nameValue || null,
-        email: emailValue
+        user_name: nameValue || null,
+        user_email: emailValue
       })
     })
     .then(response => {
-      if (response.ok) {
+      if (!response.ok) {
+        throw new Error('Server error');
+      }
+      return response.json();
+    })
+    .then(data => {
+      if (data && data.success) {
         showSuccessView(emailValue);
       } else {
-        // HTTP 409 means a unique conflict (email already in table)
-        if (response.status === 409) {
+        // Obscured errors: handle simple status messages safely
+        if (data && data.error === 'Already registered') {
           showFeedback(footerFeedback, 'This email is already registered on the waitlist.', 'error');
         } else {
-          showFeedback(footerFeedback, 'Server error. Please verify table schema.', 'error');
+          showFeedback(footerFeedback, 'Failed to join waitlist. Please verify your email.', 'error');
         }
         footerSubmitBtn.disabled = false;
         footerSubmitBtn.querySelector('span').innerText = 'Request Invitation';
