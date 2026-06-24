@@ -173,6 +173,39 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   );
 
+  // Comparison Table reveal
+  gsap.fromTo('.comparison-table-wrapper',
+    { y: 40, opacity: 0 },
+    {
+      scrollTrigger: {
+        trigger: '.comparison-section',
+        start: 'top bottom-=100',
+        toggleActions: 'play none none none'
+      },
+      y: 0,
+      opacity: 1,
+      duration: 0.8,
+      ease: 'power3.out'
+    }
+  );
+
+  // FAQ Grid items reveal
+  gsap.fromTo('.faq-item',
+    { y: 30, opacity: 0 },
+    {
+      scrollTrigger: {
+        trigger: '.faq-grid',
+        start: 'top bottom-=100',
+        toggleActions: 'play none none none'
+      },
+      y: 0,
+      opacity: 1,
+      duration: 0.7,
+      stagger: 0.1,
+      ease: 'power3.out'
+    }
+  );
+
   // Waitlist card block reveal
   gsap.fromTo('.waitlist-card',
     { y: 50, opacity: 0, scale: 0.98 },
@@ -210,7 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Footer / Main Waitlist Form handler
   footerForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const nameValue = footerNameInput.value.trim();
+    const nameValue = footerNameInput ? footerNameInput.value.trim() : '';
     const emailValue = footerEmailInput.value.trim();
 
     if (!emailValue) {

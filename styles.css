@@ -873,6 +873,9 @@ code, pre {
 .bento-w-2 {
   grid-column: span 2;
 }
+.bento-w-3 {
+  grid-column: span 3;
+}
 .bento-card-content {
   text-align: left;
 }
@@ -1108,6 +1111,135 @@ code, pre {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* Hero CTA Subtext */
+.hero-cta-subtext {
+  display: block;
+  margin-top: 14px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+/* Comparison Section */
+.comparison-section {
+  padding: 100px 0;
+  border-top: 1px solid var(--border-subtle);
+  background-color: var(--bg-section);
+  position: relative;
+  z-index: 2;
+}
+.comparison-table-wrapper {
+  max-width: 800px;
+  margin: 60px auto 0;
+  overflow-x: auto;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  background-color: #FFFFFF;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.01);
+}
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.95rem;
+}
+.comparison-table th, 
+.comparison-table td {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.comparison-table th {
+  font-weight: 600;
+  color: #000000;
+  background-color: #FAFAFA;
+}
+.comparison-table tr:last-child td {
+  border-bottom: none;
+}
+.comparison-table td {
+  color: var(--text-dark);
+  font-weight: 500;
+}
+.comparison-table td.feature-name {
+  color: #000000;
+  font-weight: 600;
+}
+.comparison-table th:not(:first-child), 
+.comparison-table td:not(:first-child) {
+  text-align: center;
+}
+.comp-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.8rem;
+  border-radius: 20px;
+  padding: 4px 12px;
+}
+.comp-badge.yes {
+  color: #000000;
+  background: none;
+  padding: 0;
+  font-size: 1.1rem;
+}
+.comp-badge.no {
+  color: var(--text-muted);
+  background: none;
+  padding: 0;
+  font-size: 1.1rem;
+}
+.comp-badge.partial {
+  background-color: #F0F0F0;
+  color: var(--text-dark);
+  font-size: 0.75rem;
+  border: 1px solid var(--border-subtle);
+}
+
+/* FAQ Section */
+.faq-section {
+  padding: 100px 0;
+  border-top: 1px solid var(--border-subtle);
+  position: relative;
+  z-index: 2;
+}
+.faq-grid {
+  max-width: 900px;
+  margin: 60px auto 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+}
+.faq-item {
+  text-align: left;
+}
+.faq-item h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #000000;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+.faq-item p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* Single Input Form & Opt Out */
+.form-row.single-input {
+  grid-template-columns: 1fr;
+}
+.waitlist-opt-out {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 8px;
+  font-weight: 500;
+  text-align: center;
+}
+
 /* 16. Responsiveness Constraints (RWD) */
 @media (max-width: 1024px) {
   .hero-title { font-size: 3.8rem; }
@@ -1116,6 +1248,7 @@ code, pre {
   .scrolly-descriptions { gap: 60px; }
   .bento-grid { grid-template-columns: 1fr 1fr; }
   .bento-w-2 { grid-column: span 1; }
+  .bento-w-3 { grid-column: span 2; }
   .bg-sphere { display: none; } /* Hide spheres on small viewports to avoid overflow */
 }
 
@@ -1124,6 +1257,8 @@ code, pre {
   .form-row { grid-template-columns: 1fr; }
   .nav-links { display: none; }
   .bento-grid { grid-template-columns: 1fr; }
+  .bento-w-2, .bento-w-3 { grid-column: span 1; }
+  .faq-grid { grid-template-columns: 1fr; gap: 30px; }
   .footer-top { flex-direction: column; gap: 40px; }
   .footer-nav { flex-wrap: wrap; gap: 40px; }
   .footer-bottom { flex-direction: column-reverse; text-align: center; gap: 16px; }
