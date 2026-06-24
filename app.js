@@ -7,6 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // Register GSAP ScrollTrigger
   gsap.registerPlugin(ScrollTrigger);
 
+  // Supabase Configuration: Connects waitlist directly to database table
+  const SUPABASE_CONFIG = {
+    url: "",       // Paste your Supabase Project URL here
+    anonKey: ""    // Paste your Supabase Public Anon API Key here
+  };
+
   /* ------------------------------------------------------------------------
      1. Lenis Smooth Scroll Initialization
      ------------------------------------------------------------------------ */
@@ -216,13 +222,12 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Start simulation
+    // Start submission process
     footerSubmitBtn.disabled = true;
-    footerSubmitBtn.querySelector('span').innerText = 'Adding user...';
+    footerSubmitBtn.querySelector('span').innerText = 'Processing...';
     showFeedback(footerFeedback, '', '');
 
-    setTimeout(() => {
-      // Simulate successful registration
+    function showSuccessView(email) {
       gsap.to(footerForm, {
         opacity: 0,
         y: -15,
@@ -230,14 +235,57 @@ document.addEventListener('DOMContentLoaded', () => {
         onComplete: () => {
           footerForm.style.display = 'none';
           successBox.style.display = 'flex';
-          successEmailDisplay.innerText = emailValue;
+          successEmailDisplay.innerText = email;
           
           // Animate success ring rotates/scale
           gsap.from('.success-ring', { rotate: -180, scale: 0, duration: 0.8, ease: 'back.out(1.5)' });
           gsap.from('.success-checkmark', { scale: 0, delay: 0.3, duration: 0.4, ease: 'back.out(1.8)' });
         }
       });
-    }, 1200);
+    }
+
+    // Fallback/Demo mode if Supabase credentials are not configured yet
+    if (!SUPABASE_CONFIG.url || !SUPABASE_CONFIG.anonKey) {
+      setTimeout(() => {
+        showSuccessView(emailValue);
+      }, 1000);
+      return;
+    }
+
+    // Direct HTTP POST to Supabase REST API
+    const tableUrl = `${SUPABASE_CONFIG.url}/rest/v1/waitlist`;
+    fetch(tableUrl, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_CONFIG.anonKey,
+        'Authorization': `Bearer ${SUPABASE_CONFIG.anonKey}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({
+        name: nameValue || null,
+        email: emailValue
+      })
+    })
+    .then(response => {
+      if (response.ok) {
+        showSuccessView(emailValue);
+      } else {
+        // HTTP 409 means a unique conflict (email already in table)
+        if (response.status === 409) {
+          showFeedback(footerFeedback, 'This email is already registered on the waitlist.', 'error');
+        } else {
+          showFeedback(footerFeedback, 'Server error. Please verify table schema.', 'error');
+        }
+        footerSubmitBtn.disabled = false;
+        footerSubmitBtn.querySelector('span').innerText = 'Request Invitation';
+      }
+    })
+    .catch(error => {
+      showFeedback(footerFeedback, 'Network error. Please try again.', 'error');
+      footerSubmitBtn.disabled = false;
+      footerSubmitBtn.querySelector('span').innerText = 'Request Invitation';
+    });
   });
 
   // Helpers
