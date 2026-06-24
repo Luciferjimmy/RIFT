@@ -998,6 +998,23 @@ code, pre {
   border-bottom: 1.5px solid #000000;
 }
 
+/* Easter egg secret link (visible only in success screen) */
+.ee-secret-link {
+  display: inline-block;
+  margin-top: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-dark);
+  text-decoration: none;
+  opacity: 0.5;
+  transition: opacity 0.4s ease, color 0.3s ease;
+  letter-spacing: 0.02em;
+}
+.ee-secret-link:hover {
+  opacity: 1;
+  color: var(--text-primary);
+}
+
 /* 14. Footer */
 .footer {
   background-color: #FFFFFF;
@@ -1303,13 +1320,16 @@ code, pre {
   transform-origin: center;
 }
 
-/* Group 1: Top-Right Concentric Orbits */
+/* Group 1: Top-Right Concentric Orbits with Depth of Field */
 .bg-orbit-tr-1 {
   width: 300px;
   height: 300px;
   top: 2%;
   right: -50px;
   transform: scaleY(0.65) rotate(-20deg);
+  border-width: 1px;
+  opacity: 0.5;
+  filter: blur(1.2px); /* Farthest/Blurred */
 }
 .bg-orbit-tr-2 {
   width: 550px;
@@ -1317,7 +1337,9 @@ code, pre {
   top: -2%;
   right: -100px;
   transform: scaleY(0.65) rotate(-20deg);
-  border-color: rgba(13, 148, 136, 0.15); /* Soft Teal Accent! */
+  border-color: rgba(13, 148, 136, 0.25); /* Teal Accent - Closer/Sharp */
+  border-width: 1.5px;
+  filter: drop-shadow(0 4px 10px rgba(13, 148, 136, 0.05));
 }
 .bg-orbit-tr-3 {
   width: 800px;
@@ -1325,6 +1347,8 @@ code, pre {
   top: -5%;
   right: -150px;
   transform: scaleY(0.65) rotate(-20deg);
+  border-width: 1px;
+  opacity: 0.75;
 }
 .bg-orbit-tr-4 {
   width: 1050px;
@@ -1332,6 +1356,8 @@ code, pre {
   top: -8%;
   right: -200px;
   transform: scaleY(0.65) rotate(-20deg);
+  border-width: 2px; /* Foreground/Thick */
+  opacity: 0.9;
 }
 .bg-orbit-tr-5 {
   width: 1300px;
@@ -1339,15 +1365,20 @@ code, pre {
   top: -12%;
   right: -250px;
   transform: scaleY(0.65) rotate(-20deg);
+  border-width: 1.2px;
+  opacity: 0.6;
 }
 
-/* Group 2: Bottom-Left Concentric Orbits */
+/* Group 2: Bottom-Left Concentric Orbits with Depth of Field */
 .bg-orbit-bl-1 {
   width: 400px;
   height: 400px;
   bottom: 12%;
   left: -80px;
   transform: scaleX(0.7) rotate(15deg);
+  border-width: 1px;
+  opacity: 0.5;
+  filter: blur(1.2px); /* Farthest/Blurred */
 }
 .bg-orbit-bl-2 {
   width: 700px;
@@ -1355,7 +1386,9 @@ code, pre {
   bottom: 8%;
   left: -150px;
   transform: scaleX(0.7) rotate(15deg);
-  border-color: rgba(244, 63, 94, 0.15); /* Soft Coral Accent! */
+  border-color: rgba(244, 63, 94, 0.25); /* Coral Accent - Closer/Sharp */
+  border-width: 1.5px;
+  filter: drop-shadow(0 4px 10px rgba(244, 63, 94, 0.05));
 }
 .bg-orbit-bl-3 {
   width: 1000px;
@@ -1363,6 +1396,8 @@ code, pre {
   bottom: 4%;
   left: -200px;
   transform: scaleX(0.7) rotate(15deg);
+  border-width: 1.2px;
+  opacity: 0.75;
 }
 .bg-orbit-bl-4 {
   width: 1300px;
@@ -1370,6 +1405,8 @@ code, pre {
   bottom: 0%;
   left: -250px;
   transform: scaleX(0.7) rotate(15deg);
+  border-width: 2px; /* Foreground/Thick */
+  opacity: 0.9;
 }
 
 /* Hero Center Technical Orbit */
@@ -1379,7 +1416,7 @@ code, pre {
   top: 15%;
   left: 50%;
   transform: translate(-50%, -50%) scaleY(0.68) rotate(-35deg);
-  border: 1.5px dashed rgba(0, 0, 0, 0.05); /* dashed line for technical contrast */
+  border: 1.5px dashed rgba(0, 0, 0, 0.06); /* dashed line for technical contrast */
 }
 
 /* 16. Responsiveness Constraints (RWD) */

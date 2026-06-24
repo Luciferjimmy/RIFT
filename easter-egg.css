@@ -1,0 +1,584 @@
+/* ==========================================================================
+   RIFT Easter Egg — Cinematic Reveal Page
+   Dark Mode / KHM Museum Typography / Editorial Scroll
+   ========================================================================== */
+
+/* 1. Theme & Custom Properties */
+:root {
+  --ee-bg: #0A0A0A;
+  --ee-bg-section: #0F0F0F;
+  --ee-text: #F5F5F5;
+  --ee-text-muted: #777777;
+  --ee-text-dim: #444444;
+  --ee-accent: rgba(255, 255, 255, 0.08);
+  --ee-border: rgba(255, 255, 255, 0.06);
+
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-display: 'Smooch Sans', sans-serif;
+
+  --max-width: 1100px;
+  --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 2. Reset & Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: initial;
+  background-color: var(--ee-bg);
+  color: var(--ee-text);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background-color: var(--ee-bg);
+  min-height: 100vh;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--ee-bg); }
+::-webkit-scrollbar-thumb { background: #222; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #444; }
+
+/* Selection */
+::selection {
+  background: rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+}
+
+/* ==========================================================================
+   3. Typography System — Mixed KHM Museum Style
+   ========================================================================== */
+
+.ee-serif {
+  font-family: var(--font-serif);
+  font-weight: 400;
+}
+
+.ee-serif-italic {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.ee-sans {
+  font-family: var(--font-sans);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+}
+
+.ee-mono {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 0.6em;
+  color: var(--ee-text-muted);
+  vertical-align: middle;
+}
+
+.ee-display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ==========================================================================
+   4. Layout Containers
+   ========================================================================== */
+
+.ee-section {
+  position: relative;
+  width: 100%;
+  padding: 0 24px;
+}
+
+.ee-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.ee-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--ee-border);
+  margin: 0;
+}
+
+/* ==========================================================================
+   5. Hero Section — Text top, ferris wheel at bottom edge
+   ========================================================================== */
+
+.ee-hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  overflow: hidden; /* CRITICAL — hides characters below the bottom edge */
+}
+
+.ee-hero-content {
+  text-align: center;
+  position: relative;
+  z-index: 5; /* Lowered below the carousel */
+  padding-top: clamp(60px, 8vh, 100px);
+  padding-bottom: 20px;
+}
+
+.ee-hero-headline {
+  font-size: clamp(3rem, 8vw, 7rem);
+  line-height: 1.05;
+  margin-bottom: 24px;
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.ee-hero-sub {
+  position: absolute;
+  bottom: 24px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--ee-text-muted);
+  z-index: 10;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Ambient grain */
+.ee-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 30%, rgba(255,255,255,0.02) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   6. Character Ferris Wheel — True circular rotation at hero bottom edge
+   
+   A large invisible circle is centered at the bottom edge of the hero.
+   Characters sit on the circumference. Only the top arc is visible —
+   the rest rotates behind the bottom edge (clipped by overflow:hidden).
+   One character sits at the top (visible), others arc below out of view.
+   Every 3s the wheel rotates 60° — current slides down one side, 
+   next rises from the other side.
+   ========================================================================== */
+
+/* Single Character Image — Centered at bottom edge, overlapping text */
+.ee-hero-image-wrap {
+  position: absolute;
+  bottom: 60px; /* Positioned above the scroll indicator */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 440px;
+  height: 440px;
+  pointer-events: none;
+  z-index: 10; /* Overlaps text */
+  will-change: transform;
+}
+
+.ee-hero-single-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: bottom;
+  filter: brightness(1.02) drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
+  pointer-events: auto;
+  cursor: pointer;
+  animation: imgFloat 6s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes imgFloat {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-8px) scale(1.02);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Violent Shake Animation for anger state */
+@keyframes shake {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  10% { transform: translate(-3px, -2px) rotate(-1deg); }
+  20% { transform: translate(-4px, 0px) rotate(1deg); }
+  30% { transform: translate(0px, 3px) rotate(0deg); }
+  40% { transform: translate(2px, -1px) rotate(1deg); }
+  50% { transform: translate(-2px, 3px) rotate(-1deg); }
+  60% { transform: translate(-4px, 2px) rotate(0deg); }
+  70% { transform: translate(3px, 2px) rotate(-2deg); }
+  80% { transform: translate(-2px, -2px) rotate(1deg); }
+  90% { transform: translate(3px, 3px) rotate(0deg); }
+  100% { transform: translate(2px, -3px) rotate(-1deg); }
+}
+
+.ee-hero-single-img.shaking {
+  animation: shake 0.1s infinite !important;
+}
+
+/* Cartoonish Comic Speech Bubble */
+.ee-speech-bubble {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%) scale(0);
+  background: #FFFFFF;
+  color: #000000;
+  border: 3px solid #000000;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  white-space: nowrap;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  z-index: 30;
+  opacity: 0;
+  pointer-events: none;
+  transform-origin: bottom center;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+}
+
+.ee-speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 12px 12px 0;
+  border-style: solid;
+  border-color: #FFFFFF transparent;
+  display: block;
+  width: 0;
+}
+
+.ee-speech-bubble::before {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 14px 14px 0;
+  border-style: solid;
+  border-color: #000000 transparent;
+  display: block;
+  width: 0;
+  z-index: -1;
+}
+
+.ee-speech-bubble.active {
+  transform: translateX(-50%) scale(1);
+  opacity: 1;
+}
+
+/* Manga Frustration Anger Marks */
+.ee-anger-symbol {
+  position: absolute;
+  font-size: 2.2rem;
+  line-height: 1;
+  color: #FF0000;
+  pointer-events: none;
+  z-index: 25;
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.5));
+  will-change: transform, opacity;
+}
+
+/* ==========================================================================
+   7. Problem Section
+   ========================================================================== */
+
+.ee-problem {
+  padding: 160px 24px;
+  position: relative;
+}
+
+.ee-problem-text {
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  line-height: 1.3;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.ee-problem-text .ee-highlight { color: #FFFFFF; }
+.ee-problem-text .ee-dim { color: var(--ee-text-dim); }
+
+.ee-reveal-line {
+  display: block;
+  overflow: hidden;
+}
+
+.ee-reveal-inner {
+  display: block;
+  opacity: 0;
+  transform: translateY(100%);
+}
+
+/* ==========================================================================
+   8. Vision Section
+   ========================================================================== */
+
+.ee-vision {
+  padding: 160px 24px;
+  position: relative;
+}
+
+.ee-vision-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 100px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.ee-vision-block {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.ee-vision-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--ee-text-dim);
+  margin-bottom: 16px;
+}
+
+.ee-vision-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  color: #FFFFFF;
+}
+
+.ee-vision-desc {
+  font-size: 1rem;
+  color: var(--ee-text-muted);
+  max-width: 560px;
+  line-height: 1.7;
+}
+
+/* ==========================================================================
+   9. Catalog — Giant Game Names with Scroll-Driven Glow
+   ========================================================================== */
+
+.ee-catalog {
+  padding: 160px 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.ee-catalog-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.ee-game-name {
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 10vw, 8rem);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--ee-text-dim);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1), text-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: center;
+  white-space: nowrap;
+  will-change: color, text-shadow; /* GPU Layer promotion to avoid paint storms */
+}
+
+.ee-game-name.glow-active {
+  color: #FFFFFF;
+  text-shadow: 0 0 35px rgba(255, 255, 255, 0.22), 0 0 70px rgba(255, 255, 255, 0.06);
+}
+
+.ee-catalog-counter {
+  text-align: center;
+  margin-top: 60px;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.ee-catalog-counter span {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ee-text-dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   10. Close Section
+   ========================================================================== */
+
+.ee-close {
+  padding: 200px 24px;
+  text-align: center;
+  position: relative;
+}
+
+.ee-close-text {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 400;
+  line-height: 1.2;
+  color: #FFFFFF;
+  margin-bottom: 16px;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.ee-close-sub {
+  font-size: 0.9rem;
+  color: var(--ee-text-dim);
+  margin-bottom: 48px;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.ee-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ee-text-muted);
+  text-decoration: none;
+  padding: 12px 28px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 30px;
+  transition: var(--transition-smooth);
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.ee-back-link:hover {
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.ee-back-link svg { width: 16px; height: 16px; }
+
+/* ==========================================================================
+   11. Ambient Background
+   ========================================================================== */
+
+.ee-noise {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  mix-blend-mode: overlay;
+}
+
+.ee-glow {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(120px);
+}
+
+.ee-glow-1 {
+  width: 500px; height: 500px;
+  top: -100px; right: -100px;
+  background: radial-gradient(circle, rgba(255,255,255,0.015) 0%, transparent 70%);
+}
+
+.ee-glow-2 {
+  width: 600px; height: 600px;
+  bottom: 20%; left: -150px;
+  background: radial-gradient(circle, rgba(255,255,255,0.01) 0%, transparent 70%);
+}
+
+/* ==========================================================================
+   12. Footer
+   ========================================================================== */
+
+.ee-footer {
+  padding: 40px 24px;
+  text-align: center;
+  border-top: 1px solid var(--ee-border);
+}
+
+.ee-footer p {
+  font-size: 0.7rem;
+  color: var(--ee-text-dim);
+  font-family: var(--font-mono);
+  letter-spacing: 0.05em;
+}
+
+/* ==========================================================================
+   13. Responsive
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .ee-hero-image-wrap {
+    width: 380px;
+    height: 380px;
+    bottom: 60px;
+  }
+  .ee-speech-bubble {
+    font-size: 0.85rem;
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .ee-hero-content { padding-top: clamp(40px, 6vh, 70px); }
+  .ee-hero-image-wrap {
+    width: 300px;
+    height: 300px;
+    bottom: 60px;
+  }
+  .ee-speech-bubble {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+  }
+  .ee-problem { padding: 100px 24px; }
+  .ee-vision { padding: 100px 24px; }
+  .ee-vision-grid { gap: 60px; }
+  .ee-catalog { padding: 100px 24px; }
+  .ee-close { padding: 120px 24px; }
+}
+
+@media (max-width: 480px) {
+  .ee-hero-image-wrap {
+    width: 240px;
+    height: 240px;
+    bottom: 60px;
+  }
+}

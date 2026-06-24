@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RIFT | Behind the curtain.</title>
+  
+  <!-- SEO -->
+  <meta name="description" content="The cinematic reveal of RIFT — a game launcher that actually works on Mac.">
+  <meta name="robots" content="noindex, nofollow">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=JetBrains+Mono:wght@400;500;700&family=Smooch+Sans:wght@100..900&display=swap" rel="stylesheet">
+  
+  <!-- Lenis CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.20/dist/lenis.css">
+  
+  <!-- Easter Egg CSS -->
+  <link rel="stylesheet" href="easter-egg.css">
+</head>
+<body>
+
+  <!-- Film Grain Noise Overlay -->
+  <div class="ee-noise" aria-hidden="true"></div>
+
+  <!-- ================================================================
+       HERO — Full viewport, mixed typography + character carousel
+       ================================================================ -->
+  <section class="ee-section ee-hero" id="ee-hero">
+    
+    <!-- Ambient glow spots -->
+    <div class="ee-glow ee-glow-1" aria-hidden="true"></div>
+    
+    <div class="ee-hero-content">
+      <h1 class="ee-hero-headline">
+        <span class="ee-serif-italic">We didn't build</span><br>
+        <span class="ee-sans">another launcher.</span><br>
+        <span class="ee-serif-italic">We built a</span> <span class="ee-display">RIFT.</span>
+      </h1>
+    </div>
+
+    <!-- Single Character Image — Centered at bottom, overlapping text -->
+    <div class="ee-hero-image-wrap">
+      <div class="ee-speech-bubble" id="ee-speech-bubble">
+        <span id="ee-speech-text">DO NOT DISTURB!</span>
+      </div>
+      <img src="Players/man_bg.png" alt="RIFT Character" class="ee-hero-single-img">
+    </div>
+
+    <!-- Subtitle positioned absolutely at the bottom edge -->
+    <p class="ee-hero-sub">This is what's coming. Scroll down.</p>
+
+  </section>
+
+  <!-- Divider -->
+  <div class="ee-divider"></div>
+
+  <!-- ================================================================
+       THE PROBLEM — Editorial large text
+       ================================================================ -->
+  <section class="ee-section ee-problem" id="ee-problem">
+    <div class="ee-container">
+      <p class="ee-problem-text">
+        <span class="ee-reveal-line"><span class="ee-reveal-inner"><span class="ee-highlight ee-serif-italic">You bought a $3,000 machine.</span></span></span>
+        <span class="ee-reveal-line"><span class="ee-reveal-inner"><span class="ee-dim">You shouldn't need a CS degree</span></span></span>
+        <span class="ee-reveal-line"><span class="ee-reveal-inner"><span class="ee-dim">to play </span><span class="ee-highlight ee-sans">Elden Ring</span><span class="ee-dim"> on it.</span></span></span>
+      </p>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="ee-divider"></div>
+
+  <!-- ================================================================
+       THE PROBLEM PT 2 — Second editorial block
+       ================================================================ -->
+  <section class="ee-section ee-problem" id="ee-problem-2">
+    <div class="ee-container">
+      <p class="ee-problem-text">
+        <span class="ee-reveal-line"><span class="ee-reveal-inner"><span class="ee-dim">You tried </span><span class="ee-highlight">CrossOver.</span></span></span>
+        <span class="ee-reveal-line"><span class="ee-reveal-inner"><span class="ee-dim">You tried </span><span class="ee-highlight">Whisky.</span></span></span>
+        <span class="ee-reveal-line"><span class="ee-reveal-inner"><span class="ee-dim">You tried </span><span class="ee-highlight">configuring Wine yourself.</span></span></span>
+        <span class="ee-reveal-line"><span class="ee-reveal-inner"><span class="ee-highlight ee-serif-italic" style="font-size: 0.85em;">It shouldn't be this hard.</span></span></span>
+      </p>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="ee-divider"></div>
+
+  <!-- ================================================================
+       THE VISION — What RIFT does under the hood
+       ================================================================ -->
+  <section class="ee-section ee-vision" id="ee-vision">
+    <div class="ee-container">
+      <div class="ee-vision-grid">
+
+        <div class="ee-vision-block">
+          <p class="ee-vision-label">01 — Translation</p>
+          <h2 class="ee-vision-title">
+            <span class="ee-serif-italic">DirectX</span> → <span class="ee-sans">Metal</span>
+          </h2>
+          <p class="ee-vision-desc">Every draw call, every shader instruction — translated from DirectX 11/12 to Apple's Metal API in real time. Not emulated. Translated. There's a difference.</p>
+        </div>
+
+        <div class="ee-vision-block">
+          <p class="ee-vision-label">02 — Optimization</p>
+          <h2 class="ee-vision-title">
+            <span class="ee-serif-italic">Per-game</span> <span class="ee-sans">profiles</span>
+          </h2>
+          <p class="ee-vision-desc">Each game gets its own custom setup. Wine configuration, shader caches, tested fixes — all pre-built. What took you hours on Reddit, RIFT does before you even hit install.</p>
+        </div>
+
+        <div class="ee-vision-block">
+          <p class="ee-vision-label">03 — Experience</p>
+          <h2 class="ee-vision-title">
+            <span class="ee-serif-italic">One click.</span> <span class="ee-sans">That's it.</span>
+          </h2>
+          <p class="ee-vision-desc">No terminal. No WINEPREFIX. No Winetricks. No XQuartz. No config files. You click play. The game runs. That's the whole product.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="ee-divider"></div>
+
+  <!-- ================================================================
+       CATALOG TEASE — Giant game names
+       ================================================================ -->
+  <section class="ee-section ee-catalog" id="ee-catalog">
+    <div class="ee-container">
+      <div class="ee-catalog-list">
+        <h2 class="ee-game-name">Elden Ring</h2>
+        <h2 class="ee-game-name">Cyberpunk 2077</h2>
+        <h2 class="ee-game-name">GTA V</h2>
+        <h2 class="ee-game-name">Red Dead 2</h2>
+        <h2 class="ee-game-name">Poppy Playtime</h2>
+      </div>
+      <div class="ee-catalog-counter">
+        <span>And the catalog is growing every week.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="ee-divider"></div>
+
+  <!-- ================================================================
+       THE CLOSE — The promise
+       ================================================================ -->
+  <section class="ee-section ee-close" id="ee-close">
+    <div class="ee-container">
+      <p class="ee-close-text">
+        <span class="ee-serif-italic">This isn't a landing page.</span><br>
+        <span class="ee-sans">This is a promise.</span>
+      </p>
+      <p class="ee-close-sub">You signed up. We'll deliver.</p>
+      <a href="index.html" class="ee-back-link">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Back to RIFT</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Ambient glow -->
+  <div class="ee-glow ee-glow-2" aria-hidden="true"></div>
+
+  <!-- Footer -->
+  <footer class="ee-footer">
+    <p>RIFT · 2026 · BUILT WITH WINE AND OPEN SOURCE TECHNOLOGY</p>
+  </footer>
+
+  <!-- GSAP & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  
+  <!-- Lenis Smooth Scroll -->
+  <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+
+  <!-- Easter Egg JS -->
+  <script src="easter-egg.js"></script>
+
+</body>
+</html>
