@@ -1284,7 +1284,7 @@ code, pre {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.04);
 }
 
-/* Background Orbits / Ovals styling */
+/* Background Orbits / Ovals styling (Concentric Contour Art) */
 .bg-orbits-container {
   position: absolute;
   top: 0;
@@ -1297,33 +1297,96 @@ code, pre {
 }
 .bg-orbit {
   position: absolute;
-  border: 1px solid rgba(0, 0, 0, 0.035);
+  border: 1px solid rgba(0, 0, 0, 0.05); /* Technical contour lines */
   border-radius: 50%;
   pointer-events: none;
 }
-.bg-orbit-1 {
-  width: 900px;
-  height: 600px;
+
+/* Group 1: Top-Right Concentric Orbits */
+.bg-orbit-tr-1 {
+  width: 300px;
+  height: 200px;
   border-radius: 50% / 40%;
-  top: -100px;
-  left: -200px;
-  transform: rotate(-25deg);
+  top: 5%;
+  right: -50px;
+  transform: rotate(-20deg);
 }
-.bg-orbit-2 {
-  width: 1200px;
-  height: 800px;
+.bg-orbit-tr-2 {
+  width: 550px;
+  height: 380px;
+  border-radius: 50% / 40%;
+  top: 0%;
+  right: -120px;
+  transform: rotate(-20deg);
+}
+.bg-orbit-tr-3 {
+  width: 800px;
+  height: 550px;
+  border-radius: 50% / 40%;
+  top: -5%;
+  right: -200px;
+  transform: rotate(-20deg);
+}
+.bg-orbit-tr-4 {
+  width: 1050px;
+  height: 720px;
+  border-radius: 50% / 40%;
+  top: -10%;
+  right: -280px;
+  transform: rotate(-20deg);
+}
+.bg-orbit-tr-5 {
+  width: 1300px;
+  height: 900px;
+  border-radius: 50% / 40%;
+  top: -15%;
+  right: -360px;
+  transform: rotate(-20deg);
+}
+
+/* Group 2: Bottom-Left Concentric Orbits */
+.bg-orbit-bl-1 {
+  width: 400px;
+  height: 280px;
   border-radius: 40% / 50%;
-  top: 25%;
-  right: -300px;
+  bottom: 15%;
+  left: -100px;
   transform: rotate(15deg);
 }
-.bg-orbit-3 {
-  width: 950px;
-  height: 550px;
-  border-radius: 50% / 45%;
+.bg-orbit-bl-2 {
+  width: 700px;
+  height: 480px;
+  border-radius: 40% / 50%;
   bottom: 10%;
-  left: -150px;
-  transform: rotate(-10deg);
+  left: -200px;
+  transform: rotate(15deg);
+}
+.bg-orbit-bl-3 {
+  width: 1000px;
+  height: 680px;
+  border-radius: 40% / 50%;
+  bottom: 5%;
+  left: -300px;
+  transform: rotate(15deg);
+}
+.bg-orbit-bl-4 {
+  width: 1300px;
+  height: 880px;
+  border-radius: 40% / 50%;
+  bottom: 0%;
+  left: -400px;
+  transform: rotate(15deg);
+}
+
+/* Hero Center Technical Orbit */
+.bg-orbit-center {
+  width: 1600px;
+  height: 1100px;
+  border-radius: 50% / 42%;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-35deg);
+  border: 1.5px dashed rgba(0, 0, 0, 0.05); /* dashed line for technical contrast */
 }
 
 /* 16. Responsiveness Constraints (RWD) */
