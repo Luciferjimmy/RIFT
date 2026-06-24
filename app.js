@@ -277,6 +277,11 @@ document.addEventListener('DOMContentLoaded', () => {
           // Animate success ring rotates/scale
           gsap.from('.success-ring', { rotate: -180, scale: 0, duration: 0.8, ease: 'back.out(1.5)' });
           gsap.from('.success-checkmark', { scale: 0, delay: 0.3, duration: 0.4, ease: 'back.out(1.8)' });
+
+          // Auto-redirect to the cinematic easter-egg page after 3 seconds
+          setTimeout(() => {
+            window.location.href = 'easter-egg.html';
+          }, 3000);
         }
       });
     }
