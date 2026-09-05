@@ -3,12 +3,19 @@ set -e
 
 # ==============================================================================
 # RIFT — Consolidated Translation Engine Installer for macOS
-# Automatically downloads, installs to /Applications, and strips Gatekeeper quarantine.
+# Automatically downloads, installs to Applications, and strips Gatekeeper quarantine.
 # ==============================================================================
 
 REPO="Luciferjimmy/RIFT"
 APP_NAME="RIFT.app"
-INSTALL_DIR="/Applications"
+
+# Determine installation directory: /Applications if writable, else $HOME/Applications
+if [ -w "/Applications" ]; then
+    INSTALL_DIR="/Applications"
+else
+    INSTALL_DIR="$HOME/Applications"
+    mkdir -p "$INSTALL_DIR"
+fi
 TARGET_APP="$INSTALL_DIR/$APP_NAME"
 
 # Colors
@@ -66,29 +73,41 @@ if [ -z "$LATEST_URL" ]; then
 fi
 
 TMP_DIR="$(mktemp -d)"
-trap 'rm -rf "$TMP_DIR"' EXIT
+MOUNT_DIR=""
+
+cleanup() {
+    local exit_code=$?
+    if [ -n "$MOUNT_DIR" ] && [ -d "$MOUNT_DIR" ]; then
+        hdiutil detach "$MOUNT_DIR" -force -quiet 2>/dev/null || true
+    fi
+    if [ -n "$TMP_DIR" ] && [ -d "$TMP_DIR" ]; then
+        rm -rf "$TMP_DIR" 2>/dev/null || true
+    fi
+    exit $exit_code
+}
+trap cleanup EXIT INT TERM
 
 if [ -n "$LATEST_URL" ]; then
-    echo -e "${BLUE}[*] Downloading from: $LATEST_URL${NC}"
+    echo -e "${BLUE}[*] Downloading release binary...${NC}"
     ARCHIVE_FILE="$TMP_DIR/RIFT_installer"
-    curl -fSL "$LATEST_URL" -o "$ARCHIVE_FILE"
+    curl -# -fSL "$LATEST_URL" -o "$ARCHIVE_FILE"
 
     echo -e "${BLUE}[*] Installing to $INSTALL_DIR...${NC}"
     if [[ "$LATEST_URL" == *.dmg ]]; then
         MOUNT_DIR="$TMP_DIR/mount"
         mkdir -p "$MOUNT_DIR"
         hdiutil attach "$ARCHIVE_FILE" -mountpoint "$MOUNT_DIR" -nobrowse -quiet
-        rm -rf "$TARGET_APP"
+        rm -rf "$TARGET_APP" 2>/dev/null || true
         cp -R "$MOUNT_DIR/$APP_NAME" "$INSTALL_DIR/"
-        hdiutil detach "$MOUNT_DIR" -quiet
+        hdiutil detach "$MOUNT_DIR" -quiet 2>/dev/null || true
+        MOUNT_DIR=""
     else
         unzip -q "$ARCHIVE_FILE" -d "$TMP_DIR/unpacked"
-        rm -rf "$TARGET_APP"
+        rm -rf "$TARGET_APP" 2>/dev/null || true
         cp -R "$TMP_DIR/unpacked/$APP_NAME" "$INSTALL_DIR/"
     fi
 else
     echo -e "${RED}[!] No published GitHub release found for $REPO yet.${NC}"
-    echo -e "${CYAN}[*] If building from local repo, run: wails build${NC}"
     exit 1
 fi
 
