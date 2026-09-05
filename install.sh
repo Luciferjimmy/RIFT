@@ -93,6 +93,10 @@ if [ -n "$LATEST_URL" ]; then
     curl -# -fSL "$LATEST_URL" -o "$ARCHIVE_FILE"
 
     echo -e "${BLUE}[*] Installing to $INSTALL_DIR...${NC}"
+    # Terminate running instance if updating
+    pkill -x RIFT 2>/dev/null || true
+    sleep 0.5
+
     if [[ "$LATEST_URL" == *.dmg ]]; then
         MOUNT_DIR="$TMP_DIR/mount"
         mkdir -p "$MOUNT_DIR"
