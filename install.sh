@@ -68,6 +68,14 @@ echo -e "${BLUE}[*] Fetching latest RIFT release from GitHub ($REPO)...${NC}"
 LATEST_URL=$(curl -fsSL "https://api.github.com/repos/$REPO/releases/latest" | grep -o 'https://[^"]*RIFT[^"]*\.dmg' | head -n 1 || true)
 
 if [ -z "$LATEST_URL" ]; then
+    # Fallback to direct latest release asset if GitHub API is rate-limited
+    DIRECT_URL="https://github.com/$REPO/releases/latest/download/RIFT-macOS-arm64.dmg"
+    if curl -sI -L --max-time 6 "$DIRECT_URL" 2>/dev/null | grep -E -q 'HTTP/[123.]+ 200|HTTP/[123.]+ 302'; then
+        LATEST_URL="$DIRECT_URL"
+    fi
+fi
+
+if [ -z "$LATEST_URL" ]; then
     # Fallback to general zip if DMG not found
     LATEST_URL=$(curl -fsSL "https://api.github.com/repos/$REPO/releases/latest" | grep -o 'https://[^"]*RIFT[^"]*\.zip' | head -n 1 || true)
 fi
@@ -93,21 +101,19 @@ if [ -n "$LATEST_URL" ]; then
     curl -# -fSL "$LATEST_URL" -o "$ARCHIVE_FILE"
 
     echo -e "${BLUE}[*] Installing to $INSTALL_DIR...${NC}"
-    # Terminate running instance if updating
-    pkill -x RIFT 2>/dev/null || true
-    sleep 0.5
+    # Ensure no running RIFT instance blocks file replacement
+    pkill -f "RIFT.app" 2>/dev/null || true
+    rm -rf "$TARGET_APP" 2>/dev/null || true
 
-    if [[ "$LATEST_URL" == *.dmg ]]; then
+    if [[ "$LATEST_URL" == *.dmg ]] || hdiutil imageinfo "$ARCHIVE_FILE" >/dev/null 2>&1; then
         MOUNT_DIR="$TMP_DIR/mount"
         mkdir -p "$MOUNT_DIR"
         hdiutil attach "$ARCHIVE_FILE" -mountpoint "$MOUNT_DIR" -nobrowse -quiet
-        rm -rf "$TARGET_APP" 2>/dev/null || true
         cp -R "$MOUNT_DIR/$APP_NAME" "$INSTALL_DIR/"
         hdiutil detach "$MOUNT_DIR" -quiet 2>/dev/null || true
         MOUNT_DIR=""
     else
         unzip -q "$ARCHIVE_FILE" -d "$TMP_DIR/unpacked"
-        rm -rf "$TARGET_APP" 2>/dev/null || true
         cp -R "$TMP_DIR/unpacked/$APP_NAME" "$INSTALL_DIR/"
     fi
 else
@@ -118,6 +124,7 @@ fi
 # 4. Suppress Gatekeeper quarantine (Unnotarized Bypass)
 echo -e "${BLUE}[*] Suppressing macOS Gatekeeper quarantine flags...${NC}"
 xattr -cr "$TARGET_APP" 2>/dev/null || true
+codesign --force --deep --sign - "$TARGET_APP" 2>/dev/null || true
 
 echo -e "\n${GREEN}${BOLD}✓ RIFT successfully installed to $TARGET_APP!${NC}"
 echo -e "${CYAN}Launching RIFT...${NC}"
