@@ -103,18 +103,20 @@ if [ -n "$LATEST_URL" ]; then
     echo -e "${BLUE}[*] Installing to $INSTALL_DIR...${NC}"
     # Ensure no running RIFT instance blocks file replacement
     pkill -f "RIFT.app" 2>/dev/null || true
-    rm -rf "$TARGET_APP" 2>/dev/null || true
+    if [ -e "$TARGET_APP" ]; then
+        rm -rf "$TARGET_APP" 2>/dev/null || sudo rm -rf "$TARGET_APP" 2>/dev/null || true
+    fi
 
     if [[ "$LATEST_URL" == *.dmg ]] || hdiutil imageinfo "$ARCHIVE_FILE" >/dev/null 2>&1; then
         MOUNT_DIR="$TMP_DIR/mount"
         mkdir -p "$MOUNT_DIR"
         hdiutil attach "$ARCHIVE_FILE" -mountpoint "$MOUNT_DIR" -nobrowse -quiet
-        cp -R "$MOUNT_DIR/$APP_NAME" "$INSTALL_DIR/"
+        cp -R "$MOUNT_DIR/$APP_NAME" "$INSTALL_DIR/" 2>/dev/null || sudo cp -R "$MOUNT_DIR/$APP_NAME" "$INSTALL_DIR/"
         hdiutil detach "$MOUNT_DIR" -quiet 2>/dev/null || true
         MOUNT_DIR=""
     else
         unzip -q "$ARCHIVE_FILE" -d "$TMP_DIR/unpacked"
-        cp -R "$TMP_DIR/unpacked/$APP_NAME" "$INSTALL_DIR/"
+        cp -R "$TMP_DIR/unpacked/$APP_NAME" "$INSTALL_DIR/" 2>/dev/null || sudo cp -R "$TMP_DIR/unpacked/$APP_NAME" "$INSTALL_DIR/"
     fi
 else
     echo -e "${RED}[!] No published GitHub release found for $REPO yet.${NC}"
@@ -123,9 +125,9 @@ fi
 
 # 4. Suppress Gatekeeper quarantine (Unnotarized Bypass)
 echo -e "${BLUE}[*] Suppressing macOS Gatekeeper quarantine flags...${NC}"
-xattr -cr "$TARGET_APP" 2>/dev/null || true
-codesign --force --deep --sign - "$TARGET_APP" 2>/dev/null || true
+xattr -cr "$TARGET_APP" 2>/dev/null || sudo xattr -cr "$TARGET_APP" 2>/dev/null || true
+codesign --force --deep --sign - "$TARGET_APP" 2>/dev/null || sudo codesign --force --deep --sign - "$TARGET_APP" 2>/dev/null || true
 
 echo -e "\n${GREEN}${BOLD}✓ RIFT successfully installed to $TARGET_APP!${NC}"
 echo -e "${CYAN}Launching RIFT...${NC}"
-open "$TARGET_APP"
+open "$TARGET_APP" || open -n "$TARGET_APP"
