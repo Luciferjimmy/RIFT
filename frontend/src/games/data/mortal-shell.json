@@ -1,0 +1,28 @@
+{
+    "id": "mortal-shell",
+    "name": "Mortal Shell",
+    "developer": "Cold Symmetry",
+    "publisher": "Playstack",
+    "releaseDate": "08/18/20",
+    "price": "₹1,299",
+    "rating": "4.5",
+    "heroImage": "https://steamcdn-a.akamaihd.net/steam/apps/1110910/library_hero.jpg",
+    "logoImage": "https://steamcdn-a.akamaihd.net/steam/apps/1110910/logo.png",
+    "description": "Mortal Shell is a deep action-RPG that tests your sanity and resilience in a shattered world. Your adversaries spare no mercy, with survival demanding superior awareness, precision, and instincts. Possess lost warriors, track down hidden sanctums, and face formidable foes.",
+    "genres": ["Action-RPG", "Souls-like", "Dark Fantasy"],
+    "features": ["Single Player", "Controller Support", "Cloud Saves"],
+    "backend": "D3DMetal (Auto-Resolved)",
+    "compatibility": "Translated Flawlessly",
+    "achievements": [
+        { "name": "Flesh and Instinct", "xp": "10 XP", "icon": "🗡️" },
+        { "name": "Is This a Gland?", "xp": "20 XP", "icon": "💀" },
+        { "name": "The Good Times are Killing Me", "xp": "50 XP", "icon": "🎸" }
+    ],
+    "sysReq": {
+        "os": "macOS 14 (Sonoma)",
+        "cpu": "Apple M1",
+        "memory": "8 GB RAM",
+        "gpu": "Apple Silicon",
+        "storage": "40 GB"
+    }
+}

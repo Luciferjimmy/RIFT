@@ -1,0 +1,547 @@
+/* ========================================
+   COMPONENTS — Premium B&W minimalist design
+   ======================================== */
+
+/* === Buttons === */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 12.5px;
+    cursor: pointer;
+    background: transparent;
+    color: var(--text-primary);
+    transition: all 0.2s var(--ease-out);
+}
+
+.btn:active {
+    transform: scale(0.97);
+}
+
+.btn-primary {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    border-color: var(--text-primary);
+}
+
+.btn-primary:hover {
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+}
+
+.btn-secondary {
+    background: var(--bg-elevated);
+    border-color: var(--border);
+    color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+    background: var(--bg-surface);
+    border-color: var(--border-focus);
+}
+
+.btn-ghost {
+    color: var(--text-secondary);
+    border-color: transparent;
+}
+
+.btn-ghost:hover {
+    color: var(--text-primary);
+    background: var(--bg-surface);
+}
+
+.btn-icon {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+    background: var(--bg-elevated);
+}
+
+.btn-icon:hover {
+    color: var(--text-primary);
+    background: var(--bg-surface);
+    border-color: var(--border-focus);
+}
+
+/* === Badges === */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 16px;
+    font-family: var(--font-mono);
+    border: 1px solid var(--border);
+}
+
+.badge-engine {
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+}
+
+.badge-backend {
+    background: var(--accent-muted);
+    color: var(--brand-cyan);
+    border-color: rgba(56, 189, 248, 0.2);
+}
+
+.badge-status {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 9px;
+    letter-spacing: 0.05em;
+}
+
+.badge-status.ready {
+    background: var(--success-muted);
+    color: var(--success);
+    border-color: rgba(52, 211, 153, 0.15);
+}
+
+.badge-status.running {
+    background: var(--warning-muted);
+    color: var(--warning);
+    border-color: rgba(251, 191, 36, 0.15);
+}
+
+.badge-status.error {
+    background: var(--error-muted);
+    color: var(--error);
+    border-color: rgba(248, 113, 113, 0.15);
+}
+
+/* === Inputs === */
+.input {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 8px 14px;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--text-primary);
+    outline: none;
+    transition: all 0.2s var(--ease-out);
+    width: 100%;
+}
+
+.input::placeholder {
+    color: var(--text-tertiary);
+}
+
+.input:focus {
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 1px var(--border-focus);
+}
+
+select.input {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%238C8C8C' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 32px;
+}
+
+/* === Toggle Switch === */
+.toggle {
+    position: relative;
+    width: 40px;
+    height: 22px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    cursor: pointer;
+    transition: all 0.2s var(--ease-out);
+}
+
+.toggle.on {
+    background: var(--text-primary);
+    border-color: var(--text-primary);
+}
+
+.toggle-knob {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background: var(--bg-primary);
+    border-radius: 50%;
+    transition: transform 0.2s var(--ease-out);
+}
+
+.toggle.on .toggle-knob {
+    transform: translateX(18px);
+    background: var(--bg-primary);
+}
+
+/* === Game Row (List View Item) === */
+.game-row {
+    display: grid;
+    grid-template-columns: 140px 1fr auto;
+    gap: 24px;
+    align-items: center;
+    padding: 16px;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    background: var(--bg-secondary);
+    margin-bottom: 12px;
+    transition: all 0.2s var(--ease-out);
+}
+
+.game-row:hover {
+    border-color: var(--border-focus);
+    background: var(--bg-elevated);
+}
+
+.game-cover {
+    width: 140px;
+    height: 80px;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    background: var(--bg-primary);
+    position: relative;
+}
+
+.game-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s var(--ease-out);
+}
+
+.game-row:hover .game-cover img {
+    transform: scale(1.03);
+}
+
+.game-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.game-title {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.game-meta {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.game-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Row Play button */
+.btn-play {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    transition: all 0.2s var(--ease-out);
+}
+
+.btn-play:hover {
+    background: var(--accent-hover);
+    transform: scale(1.06);
+}
+
+/* === Section Headers === */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 12px;
+    margin-bottom: 24px;
+}
+
+.section-header-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+/* === Filters bar === */
+.filters {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 28px;
+    align-items: center;
+}
+
+.filters .input {
+    max-width: 240px;
+}
+
+.filters select.input {
+    width: 130px;
+}
+
+/* === Empty state === */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 64px 20px;
+    gap: 16px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+}
+
+.empty-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    font-size: 16px;
+}
+
+.empty-state h2 {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--text-primary);
+}
+
+.empty-state p {
+    color: var(--text-secondary);
+    font-size: 13px;
+    max-width: 280px;
+    line-height: 1.5;
+}
+
+.empty-actions {
+    margin-top: 8px;
+}
+
+/* === Progress bar === */
+.progress-track {
+    width: 100%;
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--text-primary);
+    border-radius: 2px;
+    transition: width 0.4s var(--ease-out);
+}
+
+/* === Steam Native Login Modal === */
+.steam-modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+}
+
+.steam-modal {
+    width: 380px;
+    background: linear-gradient(to bottom, #2a475e 0%, #1b2838 100%);
+    border-radius: 2px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.steam-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+}
+
+.steam-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.steam-close-btn {
+    background: transparent;
+    border: none;
+    color: #66c0f4;
+    font-size: 24px;
+    cursor: pointer;
+    line-height: 1;
+}
+.steam-close-btn:hover { color: #fff; }
+
+.steam-modal-body {
+    padding: 0 24px 32px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.steam-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.steam-input-group label {
+    color: #8f98a0;
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.steam-input {
+    background: #32353C;
+    border: 1px solid #32353C;
+    border-radius: 2px;
+    padding: 10px 12px;
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.steam-input:focus {
+    border-color: #3d4450;
+    background: #393c44;
+}
+
+.steam-btn {
+    margin-top: 10px;
+    background: linear-gradient(to right, #47bfff 5%, #1a44c2 60%);
+    background-position: 25%;
+    background-size: 330% 100%;
+    border: none;
+    border-radius: 2px;
+    color: #fff;
+    padding: 12px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.steam-btn:hover {
+    background-position: 50%;
+}
+
+.steam-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.steam-help-text {
+    color: #8f98a0;
+    font-size: 11px;
+    margin-top: 2px;
+}
+
+.steam-error-msg {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.35);
+    color: #fca5a5;
+    padding: 10px 14px;
+    font-size: 0.78rem;
+    line-height: 1.4;
+    border-radius: 6px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+/* === Cool Animated Notification Badge === */
+.rift-notify-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 14px;
+    height: 14px;
+    margin-left: auto;
+    position: relative;
+    border-radius: 50%;
+}
+
+.rift-notify-badge::before {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: var(--brand-cyan);
+    border-radius: 50%;
+    z-index: 2;
+    box-shadow: 0 0 8px var(--brand-cyan), 0 0 12px var(--brand-cyan);
+}
+
+.rift-notify-badge::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--brand-cyan);
+    border-radius: 50%;
+    animation: riftPulse 2s infinite cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1;
+}
+
+@keyframes riftPulse {
+    0% {
+        transform: scale(0.3);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.8);
+        opacity: 0;
+    }
+}

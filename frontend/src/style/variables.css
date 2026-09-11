@@ -1,0 +1,69 @@
+:root {
+    /* === RIFT Obsidi-Dark Palette (KHM / Spotify / Discord Inspired) === */
+    --bg-primary: #080808;        /* Pure obsidian black deep backdrop */
+    --bg-main: var(--bg-primary);  /* Main app backdrop alias */
+    --bg-secondary: #0d0d0d;      /* Slightly elevated obsidian black */
+    --bg-elevated: #121212;       /* Slate cards / elevated panels */
+    --bg-surface: #181818;        /* Hover outlines and surface areas */
+    --bg-hover: #1f1f1f;          /* Standard active hover state */
+
+    /* Text System */
+    --text-primary: #f5f5f5;       /* Premium off-white editorial text */
+    --text-secondary: #8c8c8c;     /* Clean slate-grey sub-information */
+    --text-tertiary: #525252;      /* Muted tags, disabled elements */
+    --text-accent: #ffffff;
+
+    /* Accent & Brand Colors */
+    --accent: #ffffff;             /* Clean B&W contrast */
+    --accent-hover: #e0e0e0;
+    --accent-muted: rgba(255, 255, 255, 0.08);
+    --accent-glow: rgba(255, 255, 255, 0.04);
+    
+    /* Dynamic UI Glowing Accents */
+    --brand-cyan: #38bdf8;         /* Cyan highlight for operations/Active Engine */
+    --brand-emerald: #34d399;      /* Green highlight for Ready states, running status */
+    --brand-rose: #f87171;         /* Red highlight for errors */
+    
+    /* Diagnostics / States */
+    --success: var(--brand-emerald);
+    --success-muted: rgba(52, 211, 153, 0.08);
+    --warning: #fbbf24;
+    --warning-muted: rgba(251, 191, 36, 0.08);
+    --error: var(--brand-rose);
+    --error-muted: rgba(248, 113, 113, 0.08);
+
+    /* Borders */
+    --border: rgba(255, 255, 255, 0.06);
+    --border-subtle: rgba(255, 255, 255, 0.03);
+    --border-focus: rgba(255, 255, 255, 0.2);
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.6);
+    --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.7);
+    --shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.85);
+
+    /* Typography System */
+    --font-display: 'Smooch Sans', sans-serif;
+    --font-serif: 'Instrument Serif', Georgia, serif;
+    --font-sans: 'Plus Jakarta Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    /* Radii */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 20px;
+
+    /* Transitions */
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+    /* Z-index */
+    --z-base: 1;
+    --z-sticky: 10;
+    --z-nav: 100;
+    --z-overlay: 200;
+    --z-modal: 300;
+    --z-toast: 400;
+}

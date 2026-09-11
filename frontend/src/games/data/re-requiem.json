@@ -1,0 +1,28 @@
+{
+    "id": "re-requiem",
+    "name": "Resident Evil Requiem",
+    "developer": "CAPCOM",
+    "publisher": "CAPCOM",
+    "releaseDate": "02/27/26",
+    "price": "₹4,399",
+    "rating": "4.9",
+    "heroImage": "https://steamcdn-a.akamaihd.net/steam/apps/2050650/library_hero.jpg",
+    "logoImage": "https://steamcdn-a.akamaihd.net/steam/apps/2050650/logo.png",
+    "description": "Requiem for the dead. Nightmare for the living. Prepare to escape death in a heart-stopping experience that will chill you to your core. A new era of survival horror arrives with Resident Evil Requiem, the latest and most immersive entry yet in the iconic Resident Evil series.",
+    "genres": ["Action-Adventure", "Horror"],
+    "features": ["Cloud Saves", "Controller Support", "Single Player"],
+    "backend": "D3DMetal",
+    "compatibility": "Native Verified",
+    "achievements": [
+        { "name": "Rookie Agent", "xp": "10 XP", "icon": "★" },
+        { "name": "Rising Agent", "xp": "10 XP", "icon": "★★" },
+        { "name": "Resolute Agent", "xp": "50 XP", "icon": "★★★" }
+    ],
+    "sysReq": {
+        "os": "macOS 15 (Sequoia)",
+        "cpu": "Apple M1 or newer",
+        "memory": "16 GB RAM",
+        "gpu": "Apple Silicon (M-Series)",
+        "storage": "SSD is required (50GB)"
+    }
+}

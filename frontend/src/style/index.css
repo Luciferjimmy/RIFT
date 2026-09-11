@@ -1,0 +1,84 @@
+@import './variables.css';
+@import './typography.css';
+@import './layout.css';
+@import './components.css';
+@import './console.css';
+@import './animations.css';
+@import './views.css';
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* =========================================
+   OVERBOARD SETUP MODE (FULLSCREEN OVERRIDE)
+   ========================================= */
+body.setup-active .sidebar,
+body.setup-active .top-bar {
+    display: none !important;
+}
+body.setup-active .app {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+}
+body.setup-active .main-panel {
+    border: none;
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+body.setup-active #app-content {
+    height: 100vh;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    min-height: 100vh;
+    background: var(--bg-primary);
+}
+
+::selection {
+    background: var(--accent);
+    color: #fff;
+}
+
+/* Scrollbar — minimal, dark */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-tertiary);
+}
+
+/* Disable text selection on UI chrome */
+.sidebar, .console-header, .nav-item, .btn, .toggle {
+    user-select: none;
+}
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--accent-hover);
+}
